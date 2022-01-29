@@ -60,7 +60,8 @@ public class DriveCommand extends CommandBase {
     @Override
     public void execute() {
         m_drive.drive(m_driveStickY.getAsDouble(), m_driveStickZ.getAsDouble(), 
-            (Math.abs(m_driveStickZ.getAsDouble()) < kDeadzone));
+            // If the robot isn't moving, spin in place
+            (Math.abs(m_driveStickY.getAsDouble()) < kDeadzone)); 
     }
 
     // Called once the command ends or is interrupted.
