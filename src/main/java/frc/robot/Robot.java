@@ -14,6 +14,9 @@ package frc.robot;
 
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -31,6 +34,7 @@ public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
 
     private RobotContainer m_robotContainer;
+    double oldPosition;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -65,6 +69,7 @@ public class Robot extends TimedRobot {
         // robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+
     }
 
     /**
@@ -108,6 +113,7 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
+            System.out.println("sensor position = " + m_robotContainer.getDrive().getLMasterMotor().getSelectedSensorPosition());
     }
 
     /**
@@ -115,6 +121,11 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+        double newPosition = m_robotContainer.getDrive().getLMasterMotor().getSelectedSensorPosition();
+        if (Math.abs(newPosition - oldPosition) > 1000) {
+            System.out.println("sensor position = " + newPosition);
+            oldPosition = newPosition;
+        }
     }
 
     @Override
