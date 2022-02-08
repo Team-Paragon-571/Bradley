@@ -74,7 +74,7 @@ public class Index extends ParagonSubsystemBase {
 
     @Override
     public void stop() {
-        // TODO Add method to stop the subsystem
+        indexMotor.stopMotor();
         
     }
 

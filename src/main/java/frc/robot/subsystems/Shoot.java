@@ -73,8 +73,7 @@ public class Shoot extends ParagonSubsystemBase {
 
     @Override
     public void stop() {
-        // TODO stop all motors
-
+        shootMotor.stopMotor();
     }
 
     // Put methods for controlling this subsystem

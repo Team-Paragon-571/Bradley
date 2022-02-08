@@ -74,7 +74,7 @@ public class Intake extends ParagonSubsystemBase {
 
     @Override
     public void stop() {
-        // TODO stop the subsystem
+        intakeMotor.stopMotor();
 
     }
 
