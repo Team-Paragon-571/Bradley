@@ -31,7 +31,17 @@ public class Constants {
         public static final int kRightMotorRearPort = 4;
     }
 
+    public static final class MotorConstants {
+        public static final int kLeftIntakeArmPort = 5;
+        public static final int kRightIntakeArmPort = 6;
+    }
+
     public static final class ControlConstants {
         public static final double kDeadzone = 0.3;
+    }
+
+    public static final class DigitalConstants {
+        public static final int kLimitSwitchIntakeArmTopPort = 7;
+        public static final int kLimitSwitchIntakeArmBottomPort = 8;
     }
 }
