@@ -4,9 +4,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.frc571.bradley.subsystems.Index;
 
-/**
- *
- */
 public class IndexCommand extends CommandBase {
 
     private final Index m_index;

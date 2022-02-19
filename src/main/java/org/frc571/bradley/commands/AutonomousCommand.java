@@ -4,9 +4,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.frc571.bradley.subsystems.Drive;
 
-/**
- *
- */
 public class AutonomousCommand extends CommandBase {
 
     private final Drive m_drive;

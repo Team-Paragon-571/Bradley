@@ -4,9 +4,6 @@ import org.frc571.bradley.subsystems.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/**
- *
- */
 public class SuckCommand extends CommandBase {
 
     private final Intake m_intake;

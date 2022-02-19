@@ -2,9 +2,6 @@ package org.frc571.bradley.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 
-/**
- *
- */
 public class Shooter extends ParagonSubsystemBase {
     private static Shooter shooter;
     private String name = "shoot";

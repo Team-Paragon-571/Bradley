@@ -4,9 +4,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.frc571.bradley.subsystems.Shooter;
 
-/**
- *
- */
 public class ShootCommand extends CommandBase {
 
     private final Shooter m_shoot;
