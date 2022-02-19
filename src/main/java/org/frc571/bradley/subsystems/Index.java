@@ -8,9 +8,6 @@ public class Index extends ParagonSubsystemBase {
     private String name = "Index";
     private PWMVictorSPX indexMotor;
 
-    /**
-    *
-    */
     private Index() {
         indexMotor = new PWMVictorSPX(6);
         addChild("IndexMotor", indexMotor);

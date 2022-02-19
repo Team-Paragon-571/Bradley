@@ -7,9 +7,6 @@ public class Shooter extends ParagonSubsystemBase {
     private String name = "shoot";
     private PWMVictorSPX shootMotor;
 
-    /**
-    *
-    */
     private Shooter() {
         shootMotor = new PWMVictorSPX(7);
         addChild("ShootMotor", shootMotor);

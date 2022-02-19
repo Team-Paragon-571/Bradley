@@ -22,9 +22,6 @@ public class Drive extends ParagonSubsystemBase {
     private DifferentialDrive differentialDrive;
     private WPI_Pigeon2 pigeon;
 
-    /**
-    *
-    */
     private Drive() {
         lMaster = new WPI_TalonFX(1);
         rMaster = new WPI_TalonFX(3);
