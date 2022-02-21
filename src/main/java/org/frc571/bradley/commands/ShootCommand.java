@@ -8,9 +8,9 @@ public class ShootCommand extends CommandBase {
 
     private final Shooter m_shoot;
 
-    public ShootCommand(Shooter subsystem) {
+    public ShootCommand() {
 
-        m_shoot = subsystem;
+        m_shoot = Shooter.getInstance();
         addRequirements(m_shoot);
 
     }

@@ -8,9 +8,9 @@ public class EjectCommand extends CommandBase {
 
     private final Intake m_intake;
 
-    public EjectCommand(Intake subsystem) {
+    public EjectCommand() {
 
-        m_intake = subsystem;
+        m_intake = Intake.getInstance();
         addRequirements(m_intake);
 
     }

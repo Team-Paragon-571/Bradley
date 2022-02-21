@@ -8,9 +8,9 @@ public class StopIntakeCommand extends CommandBase {
 
     private final Intake m_intake;
 
-    public StopIntakeCommand(Intake subsystem) {
+    public StopIntakeCommand() {
 
-        m_intake = subsystem;
+        m_intake = Intake.getInstance();
         addRequirements(m_intake);
 
     }

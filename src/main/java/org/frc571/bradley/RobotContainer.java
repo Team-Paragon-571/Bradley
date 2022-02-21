@@ -61,10 +61,10 @@ public class RobotContainer {
     configureButtonBindings();
 
     // Configure default commands
-    m_drive.setDefaultCommand(new DriveCommand(driveController::getLeftY, driveController::getRightX, m_drive));
+    m_drive.setDefaultCommand(new DriveCommand(driveController::getLeftY, driveController::getRightX));
 
     // Configure autonomous sendable chooser
-    m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand(m_drive));
+    m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand());
 
     SmartDashboard.putData("Auto Mode", m_chooser);
   }
@@ -84,16 +84,16 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Create some buttons
     final JoystickButton ejectButton = new JoystickButton(driveController, XboxController.Button.kX.value);
-    ejectButton.whenPressed(new EjectCommand(m_intake), true);
+    ejectButton.whenPressed(new EjectCommand(), true);
 
     final JoystickButton stopIntakeButton = new JoystickButton(driveController, XboxController.Button.kB.value);
-    stopIntakeButton.whenPressed(new StopIntakeCommand(m_intake), true);
+    stopIntakeButton.whenPressed(new StopIntakeCommand(), true);
 
     final JoystickButton shootButton = new JoystickButton(driveController, XboxController.Button.kY.value);
-    shootButton.whenPressed(new ShootCommand(m_shoot), true);
+    shootButton.whenPressed(new ShootCommand(), true);
 
     final JoystickButton intakeButton = new JoystickButton(driveController, XboxController.Button.kA.value);
-    intakeButton.whenPressed(new IntakeCommand(m_intake, m_index), true);
+    intakeButton.whenPressed(new IntakeCommand(), true);
 
     final JoystickButton raiseIntakeButton = new JoystickButton(operatorController,
         XboxController.Button.kLeftBumper.value);

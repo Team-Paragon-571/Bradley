@@ -1,9 +1,10 @@
 package org.frc571.bradley.commands;
-import org.frc571.bradley.subsystems.Drive;
 
 import static org.frc571.bradley.Constants.ControlConstants.kDeadzone;
 
 import java.util.function.DoubleSupplier;
+
+import org.frc571.bradley.subsystems.Drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -13,12 +14,12 @@ public class DriveCommand extends CommandBase {
     private DoubleSupplier m_forward;
     private DoubleSupplier m_turn;
 
-    public DriveCommand(DoubleSupplier forward, DoubleSupplier turn, Drive subsystem) {
+    public DriveCommand(DoubleSupplier forward, DoubleSupplier turn) {
 
         m_forward = forward;
         m_turn = turn;
 
-        m_drive = subsystem;
+        m_drive = Drive.getInstance();
         addRequirements(m_drive);
 
     }

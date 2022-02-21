@@ -8,9 +8,9 @@ public class AutonomousCommand extends CommandBase {
 
     private final Drive m_drive;
 
-    public AutonomousCommand(Drive subsystem) {
+    public AutonomousCommand() {
 
-        m_drive = subsystem;
+        m_drive = Drive.getInstance();
         addRequirements(m_drive);
 
     }

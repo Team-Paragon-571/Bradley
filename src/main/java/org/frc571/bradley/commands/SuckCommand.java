@@ -8,9 +8,9 @@ public class SuckCommand extends CommandBase {
 
     private final Intake m_intake;
 
-    public SuckCommand(Intake subsystem) {
+    public SuckCommand() {
 
-        m_intake = subsystem;
+        m_intake = Intake.getInstance();
         addRequirements(m_intake);
 
     }

@@ -8,9 +8,9 @@ public class IndexCommand extends CommandBase {
 
     private final Index m_index;
 
-    public IndexCommand(Index subsystem) {
+    public IndexCommand() {
 
-        m_index = subsystem;
+        m_index = Index.getInstance();
         addRequirements(m_index);
 
     }
