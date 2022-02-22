@@ -1,3 +1,4 @@
+
 package org.frc571.bradley.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -6,12 +7,12 @@ import org.frc571.bradley.subsystems.Index;
 
 public class IndexCommand extends CommandBase {
 
-    private final Index m_index;
+    private final Index index;
 
     public IndexCommand() {
 
-        m_index = Index.getInstance();
-        addRequirements(m_index);
+        index = Index.getInstance();
+        addRequirements(index);
 
     }
 
@@ -23,6 +24,12 @@ public class IndexCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        if (index.getFrontInput()) {
+            index.turn();
+        }
+        if (index.getMiddleInput() || index.getBackInput()) {
+            index.stop();
+        }
     }
 
     // Called once the command ends or is interrupted.
