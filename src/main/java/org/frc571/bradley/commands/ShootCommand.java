@@ -12,7 +12,7 @@ public class ShootCommand extends CommandBase {
 
         m_shoot = Shooter.getInstance();
         addRequirements(m_shoot);
-
+        
     }
 
     // Called when the command is initially scheduled.
