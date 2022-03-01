@@ -1,5 +1,7 @@
 package org.frc571.bradley.subsystems;
 
+import org.frc571.bradley.Constants;
+
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 
 public class Shooter extends ParagonSubsystemBase {
@@ -8,7 +10,7 @@ public class Shooter extends ParagonSubsystemBase {
     private PWMVictorSPX shootMotor;
 
     private Shooter() {
-        shootMotor = new PWMVictorSPX(7);
+        shootMotor = new PWMVictorSPX(Constants.MotorConstants.kShooterMotor);
         addChild("ShootMotor", shootMotor);
         shootMotor.setInverted(false);
 
@@ -43,6 +45,9 @@ public class Shooter extends ParagonSubsystemBase {
     public String getName() {
 
         return name;
+    }
+    public void shoot() {
+        shootMotor.set(Constants.ControlConstants.kShootMotor);
     }
 
     @Override

@@ -1,6 +1,8 @@
 
 package org.frc571.bradley.subsystems;
 
+import org.frc571.bradley.Constants;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 
@@ -8,19 +10,22 @@ public class Index extends ParagonSubsystemBase {
     private static Index index;
 
     private String name = "Index";
-    private PWMVictorSPX indexMotor;
+    private PWMVictorSPX leftIndexMotor,rightIndexMotor;
     private DigitalInput frontInput;
     private DigitalInput middleInput;
     private DigitalInput backInput;
 
     private Index() {
-        indexMotor = new PWMVictorSPX(6);
-        addChild("IndexMotor", indexMotor);
-        indexMotor.setInverted(false);
+        leftIndexMotor = new PWMVictorSPX(Constants.MotorConstants.kLeftIndexMotor);
+        rightIndexMotor = new PWMVictorSPX(Constants.MotorConstants.kRightIndexMotor);
+        addChild("IndexMotor", leftIndexMotor);
+        addChild("IndexMotor", rightIndexMotor);
+        leftIndexMotor.setInverted(false);
+        rightIndexMotor.setInverted(false);
 
-        frontInput = new DigitalInput(1);
-        middleInput = new DigitalInput(2);
-        backInput = new DigitalInput(3);
+        frontInput = new DigitalInput(Constants.DigitalConstants.kFrontInput);
+        middleInput = new DigitalInput(Constants.DigitalConstants.kMiddleInput);
+        backInput = new DigitalInput(Constants.DigitalConstants.kBackInput);
     }
 
     public static synchronized Index getInstance() {
@@ -56,7 +61,8 @@ public class Index extends ParagonSubsystemBase {
 
     @Override
     public void stop() {
-        indexMotor.stopMotor();
+        leftIndexMotor.stopMotor();
+        rightIndexMotor.stopMotor();
 
     }
 
@@ -75,6 +81,7 @@ public class Index extends ParagonSubsystemBase {
         return backInput.get();
     }
     public void turn() {
-        indexMotor.set(0.5);
+        rightIndexMotor.set(0.5);
+        leftIndexMotor.set(0.5);
     }
 }

@@ -12,7 +12,7 @@ public class ShootCommand extends CommandBase {
 
         m_shoot = Shooter.getInstance();
         addRequirements(m_shoot);
-
+        
     }
 
     // Called when the command is initially scheduled.
@@ -23,6 +23,7 @@ public class ShootCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        m_shoot.shoot();
     }
 
     // Called once the command ends or is interrupted.

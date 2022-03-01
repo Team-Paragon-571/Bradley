@@ -90,7 +90,7 @@ public class RobotContainer {
     stopIntakeButton.whenPressed(new StopIntakeCommand(), true);
 
     final JoystickButton shootButton = new JoystickButton(driveController, XboxController.Button.kY.value);
-    shootButton.whenPressed(new ShootCommand(), true);
+    shootButton.whileHeld(new ShootCommand(), true);
 
     final JoystickButton intakeButton = new JoystickButton(driveController, XboxController.Button.kA.value);
     intakeButton.whenPressed(new IntakeCommand(), true);
@@ -102,7 +102,7 @@ public class RobotContainer {
     final JoystickButton lowerIntakeButton = new JoystickButton(operatorController,
         XboxController.Button.kRightBumper.value);
     lowerIntakeButton.whenPressed(new LowerIntake(), true);
-
+    
   }
 
   public XboxController getOperatorController() {
