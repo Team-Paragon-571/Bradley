@@ -12,7 +12,6 @@ public class Index extends ParagonSubsystemBase {
     private String name = "Index";
     private PWMVictorSPX IndexMotor;
     private DigitalInput frontInput;
-    private DigitalInput middleInput;
     private DigitalInput backInput;
 
     private Index() {
@@ -21,7 +20,6 @@ public class Index extends ParagonSubsystemBase {
         IndexMotor.setInverted(false);
 
         frontInput = new DigitalInput(Constants.DigitalConstants.kFrontInput);
-        middleInput = new DigitalInput(Constants.DigitalConstants.kMiddleInput);
         backInput = new DigitalInput(Constants.DigitalConstants.kBackInput);
     }
 
@@ -52,7 +50,6 @@ public class Index extends ParagonSubsystemBase {
 
     @Override
     public String getName() {
-        // TODO Auto-generated method stub
         return name;
     }
 
@@ -67,10 +64,6 @@ public class Index extends ParagonSubsystemBase {
 
     public boolean getFrontInput() {
         return frontInput.get();
-    }
-
-    public boolean getMiddleInput() {
-        return middleInput.get();
     }
 
     public boolean getBackInput() {

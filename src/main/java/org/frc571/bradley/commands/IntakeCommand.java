@@ -24,28 +24,35 @@ public class IntakeCommand extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        intake.setSpeed(SpeedConstants.kIntakeMotorSpeed);
+        LowerIntake lower = new LowerIntake();
+        while (!lower.isFinished()) {
+            // wait while intake lowers
+        }
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (index.getFrontInput()) {
-            index.turn();
-        }
+        index.turn();
+        intake.setSpeed(SpeedConstants.kIntakeMotorSpeed);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         index.stop();
+        intake.setSpeed(-SpeedConstants.kIntakeMotorSpeed);
+        RaiseIntake raise = new RaiseIntake();
+        while (!raise.isFinished()) {
+            // wait while intake raises
+        }
         intake.stop();
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if (index.getMiddleInput() || index.getBackInput()) {
+        if (index.getFrontInput() && index.getBackInput()) {
             return true;
         }
         return false;
