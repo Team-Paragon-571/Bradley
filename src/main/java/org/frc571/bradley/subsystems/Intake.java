@@ -61,4 +61,8 @@ public class Intake extends ParagonSubsystemBase {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
+    public void setSpeed(double speed) {
+        intakeMotor.set(speed);
+    }
+
 }

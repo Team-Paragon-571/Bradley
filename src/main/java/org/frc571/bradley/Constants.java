@@ -41,4 +41,9 @@ public class Constants {
         public static final int kMiddleInput = 10;
         public static final int kBackInput = 11;
     }
+
+    public static final class SpeedConstants {
+        public static final double kIntakeMotorSpeed = 0.5;
+
+    }
 }
