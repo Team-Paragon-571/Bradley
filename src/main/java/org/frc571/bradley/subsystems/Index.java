@@ -72,4 +72,8 @@ public class Index extends ParagonSubsystemBase {
     public void turn() {
         IndexMotor.set(0.5);
     }
+
+    public void reverse() {
+        IndexMotor.set(-0.5);
+    }
 }
