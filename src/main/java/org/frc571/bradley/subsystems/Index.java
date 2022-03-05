@@ -10,18 +10,15 @@ public class Index extends ParagonSubsystemBase {
     private static Index index;
 
     private String name = "Index";
-    private PWMVictorSPX leftIndexMotor,rightIndexMotor;
+    private PWMVictorSPX IndexMotor;
     private DigitalInput frontInput;
     private DigitalInput middleInput;
     private DigitalInput backInput;
 
     private Index() {
-        leftIndexMotor = new PWMVictorSPX(Constants.MotorConstants.kLeftIndexMotor);
-        rightIndexMotor = new PWMVictorSPX(Constants.MotorConstants.kRightIndexMotor);
-        addChild("IndexMotor", leftIndexMotor);
-        addChild("IndexMotor", rightIndexMotor);
-        leftIndexMotor.setInverted(false);
-        rightIndexMotor.setInverted(false);
+        IndexMotor = new PWMVictorSPX(Constants.MotorConstants.kLeftIndexMotor);
+        addChild("IndexMotor", IndexMotor);
+        IndexMotor.setInverted(false);
 
         frontInput = new DigitalInput(Constants.DigitalConstants.kFrontInput);
         middleInput = new DigitalInput(Constants.DigitalConstants.kMiddleInput);
@@ -61,8 +58,7 @@ public class Index extends ParagonSubsystemBase {
 
     @Override
     public void stop() {
-        leftIndexMotor.stopMotor();
-        rightIndexMotor.stopMotor();
+        IndexMotor.stopMotor();
 
     }
 
@@ -81,7 +77,6 @@ public class Index extends ParagonSubsystemBase {
         return backInput.get();
     }
     public void turn() {
-        rightIndexMotor.set(0.5);
-        leftIndexMotor.set(0.5);
+        IndexMotor.set(0.5);
     }
 }
