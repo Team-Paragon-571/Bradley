@@ -15,7 +15,6 @@ public class ShootCommand extends CommandBase {
         
     }
 
-    // Called when the command is initially scheduled.
     @Override
     public void initialize() {
     }
@@ -26,7 +25,6 @@ public class ShootCommand extends CommandBase {
         m_shoot.shoot();
     }
 
-    // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
     }

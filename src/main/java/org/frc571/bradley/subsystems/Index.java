@@ -5,6 +5,7 @@ import org.frc571.bradley.Constants;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Index extends ParagonSubsystemBase {
     private static Index index;
@@ -32,19 +33,16 @@ public class Index extends ParagonSubsystemBase {
 
     @Override
     public void periodic() {
-        // This method will be called once per scheduler run
-
     }
 
     @Override
     public void simulationPeriodic() {
-        // This method will be called once per scheduler run when in simulation
-
     }
 
     @Override
     public void outputTelemetry() {
-        // TODO Add telemetry to smart dashboard
+        SmartDashboard.putBoolean(getName() + "/Front Input", frontInput.get());
+        SmartDashboard.putBoolean(getName() + "/Back Input", backInput.get());
 
     }
 
@@ -69,6 +67,7 @@ public class Index extends ParagonSubsystemBase {
     public boolean getBackInput() {
         return backInput.get();
     }
+
     public void turn() {
         IndexMotor.set(0.5);
     }
