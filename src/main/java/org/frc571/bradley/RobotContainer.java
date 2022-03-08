@@ -20,9 +20,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.TimedRobot;
-
 /**
  * This class is where the bulk of the robot should be declared. Since
  * Command-based is a
@@ -67,6 +64,8 @@ public class RobotContainer {
     m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand());
 
     SmartDashboard.putData("Auto Mode", m_chooser);
+
+    SmartDashboard.putData("Intake Command", new IntakeCommand());
   }
 
   public static RobotContainer getInstance() {
@@ -102,7 +101,7 @@ public class RobotContainer {
     final JoystickButton lowerIntakeButton = new JoystickButton(operatorController,
         XboxController.Button.kRightBumper.value);
     lowerIntakeButton.whenPressed(new LowerIntake(), true);
-    
+
   }
 
   public XboxController getOperatorController() {

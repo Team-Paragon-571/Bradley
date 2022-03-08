@@ -1,16 +1,16 @@
 package org.frc571.bradley.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.frc571.bradley.Constants;
 
 public class Shooter extends ParagonSubsystemBase {
     private static Shooter shooter;
     private String name = "shoot";
-    private WPI_VictorSPX shootMotor;
+    private WPI_TalonSRX shootMotor;
 
     private Shooter() {
-        shootMotor = new WPI_VictorSPX(Constants.MotorConstants.SHOOTER_MOTOR);
+        shootMotor = new WPI_TalonSRX(Constants.MotorConstants.SHOOTER_MOTOR);
         addChild("ShootMotor", shootMotor);
         shootMotor.setInverted(false);
 

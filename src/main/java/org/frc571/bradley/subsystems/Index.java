@@ -64,11 +64,11 @@ public class Index extends ParagonSubsystemBase {
     // here. Call these from Commands.
 
     public boolean getFrontInput() {
-        return frontInput.get();
+        return !frontInput.get();
     }
 
     public boolean getRearInput() {
-        return rearInput.get();
+        return !rearInput.get();
     }
 
     public void turn() {
