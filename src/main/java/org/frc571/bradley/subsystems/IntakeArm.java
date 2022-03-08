@@ -20,10 +20,10 @@ public class IntakeArm extends ParagonSubsystemBase {
 
     private IntakeArm() {
         name = getClass().getName();
-        motorMaster = new WPI_VictorSPX(MotorConstants.kLeftIntakeArmPort);
-        motorFollower = new WPI_VictorSPX(MotorConstants.kRightIntakeArmPort);
-        limitTop = new DigitalInput(DigitalConstants.kLimitSwitchIntakeArmTopPort);
-        limitBottom = new DigitalInput(DigitalConstants.kLimitSwitchIntakeArmBottomPort);
+        motorMaster = new WPI_VictorSPX(MotorConstants.LEFT_INTAKE_ARM_MOTOR);
+        motorFollower = new WPI_VictorSPX(MotorConstants.RIGHT_INTAKE_ARM_MOTOR);
+        limitTop = new DigitalInput(DigitalConstants.TOP_INTAKE_ARM_LIMIT_SWITCH);
+        limitBottom = new DigitalInput(DigitalConstants.BOTTOM_INTAKE_ARM_LIMIT_SWITCH);
 
         addChild("motorMaster", motorMaster);
         addChild("motorFollower", motorFollower);

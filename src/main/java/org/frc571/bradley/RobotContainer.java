@@ -55,7 +55,7 @@ public class RobotContainer {
 
   private RobotContainer() {
 
-    CameraServer.startAutomaticCapture();
+    // CameraServer.startAutomaticCapture();
 
     // Configure the button bindings
     configureButtonBindings();

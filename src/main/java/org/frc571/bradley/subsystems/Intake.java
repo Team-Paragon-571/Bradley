@@ -1,12 +1,14 @@
 package org.frc571.bradley.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import org.frc571.bradley.Constants.MotorConstants;
+
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
 public class Intake extends ParagonSubsystemBase {
 
     private static Intake intake;
 
-    private PWMVictorSPX intakeMotor;
+    private Spark intakeMotor;
 
     private String name = "Intake";
 
@@ -14,7 +16,7 @@ public class Intake extends ParagonSubsystemBase {
      * Takes in game pieces off the floor
      */
     private Intake() {
-        intakeMotor = new PWMVictorSPX(5);
+        intakeMotor = new Spark(MotorConstants.INTAKE_MOTOR);
         addChild("IntakeMotor", intakeMotor);
         intakeMotor.setInverted(false);
 

@@ -15,18 +15,19 @@ package org.frc571.bradley;
  */
 public class Constants {
     public static final class DriveConstants {
-        public static final int kLeftMotorFrontPort = 1;
-        public static final int kLeftMotorRearPort = 2;
-        public static final int kRightMotorFrontPort = 3;
-        public static final int kRightMotorRearPort = 4;
+        public static final int LEFT_FRONT_MOTOR = 1;
+        public static final int LEFT_REAR_MOTOR = 2;
+        public static final int RIGHT_FRONT_MOTOR = 3;
+        public static final int RIGHT_REAR_MOTOR = 4;
+        public static final int PIGEON = 30;
     }
 
     public static final class MotorConstants {
-        public static final int kLeftIntakeArmPort = 5;
-        public static final int kRightIntakeArmPort = 6;
-        public static final int kLeftIndexMotor = 7;
-        public static final int kRightIndexMotor = 8;
-        public static final int kShooterMotor = 9;
+        public static final int LEFT_INTAKE_ARM_MOTOR = 5;
+        public static final int RIGHT_INTAKE_ARM_MOTOR = 6;
+        public static final int INDEX_MOTOR = 7;
+        public static final int INTAKE_MOTOR = 8;
+        public static final int SHOOTER_MOTOR = 9;
     }
 
     public static final class ControlConstants {
@@ -35,11 +36,10 @@ public class Constants {
     }
 
     public static final class DigitalConstants {
-        public static final int kLimitSwitchIntakeArmTopPort = 7;
-        public static final int kLimitSwitchIntakeArmBottomPort = 8;
-        public static final int kFrontInput = 9;
-        public static final int kMiddleInput = 10;
-        public static final int kBackInput = 11;
+        public static final int TOP_INTAKE_ARM_LIMIT_SWITCH = 0;
+        public static final int BOTTOM_INTAKE_ARM_LIMIT_SWITCH = 1;
+        public static final int FRONT_INPUT = 2;
+        public static final int REAR_INPUT = 3;
     }
 
     public static final class SpeedConstants {

@@ -2,29 +2,27 @@ package org.frc571.bradley.subsystems;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.sensors.Pigeon2;
-import com.ctre.phoenix.sensors.PigeonIMU;
-import com.ctre.phoenix.sensors.WPI_Pigeon2;
+
+import org.frc571.bradley.Constants.DriveConstants;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drive extends ParagonSubsystemBase {
     private static Drive drive;
     private WPI_TalonFX lMaster;
     private WPI_TalonFX lFollower;
-    private MotorControllerGroup leftMotors;
     private WPI_TalonFX rMaster;
     private WPI_TalonFX rFollower;
-    private MotorControllerGroup rightMotors;
     private DifferentialDrive differentialDrive;
-    private WPI_Pigeon2 pigeon;
 
     private Drive() {
-        lMaster = new WPI_TalonFX(1);
-        rMaster = new WPI_TalonFX(3);
+        lMaster = new WPI_TalonFX(DriveConstants.LEFT_FRONT_MOTOR);
+        lMaster.configFactoryDefault();
+        rMaster = new WPI_TalonFX(DriveConstants.RIGHT_FRONT_MOTOR);
+        rMaster.configFactoryDefault();
 
         lMaster.setInverted(true);
         rMaster.setInverted(false);
@@ -34,8 +32,10 @@ public class Drive extends ParagonSubsystemBase {
 
         lMaster.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 20);
 
-        lFollower = new WPI_TalonFX(2);
-        rFollower = new WPI_TalonFX(4);
+        lFollower = new WPI_TalonFX(DriveConstants.LEFT_REAR_MOTOR);
+        lFollower.configFactoryDefault();
+        rFollower = new WPI_TalonFX(DriveConstants.RIGHT_REAR_MOTOR);
+        rFollower.configFactoryDefault();
 
         addChild("lFollower", lFollower);
         addChild("rFollower", rFollower);
@@ -51,8 +51,6 @@ public class Drive extends ParagonSubsystemBase {
         differentialDrive.setSafetyEnabled(true);
         differentialDrive.setExpiration(0.1);
         differentialDrive.setMaxOutput(1.0);
-
-        pigeon = new WPI_Pigeon2(20);
 
     }
 
@@ -130,8 +128,6 @@ public class Drive extends ParagonSubsystemBase {
         SmartDashboard.putNumber(getName() + "Drive/LeftMotor/Encoder",
                 getRFollowerMotor().getSelectedSensorPosition());
         SmartDashboard.putNumber("Drive/RightMotor/Encoder", getLFollowerMotor().getSelectedSensorPosition());
-        // TODO: add Pigeon IMU telemetry
-        // SmartDashboard.putNumber(getName() + "Drive/Pigeon/Yaw", pigeon.getYaw());
 
     }
 

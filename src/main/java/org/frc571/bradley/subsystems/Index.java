@@ -1,28 +1,27 @@
 
 package org.frc571.bradley.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import org.frc571.bradley.Constants;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 
 public class Index extends ParagonSubsystemBase {
     private static Index index;
 
     private String name = "Index";
-    private PWMVictorSPX IndexMotor;
+    private WPI_VictorSPX indexMotor;
     private DigitalInput frontInput;
-    private DigitalInput middleInput;
-    private DigitalInput backInput;
+    private DigitalInput rearInput;
 
     private Index() {
-        IndexMotor = new PWMVictorSPX(Constants.MotorConstants.kLeftIndexMotor);
-        addChild("IndexMotor", IndexMotor);
-        IndexMotor.setInverted(false);
+        indexMotor = new WPI_VictorSPX(Constants.MotorConstants.INDEX_MOTOR);
+        addChild("IndexMotor", indexMotor);
+        indexMotor.setInverted(false);
 
-        frontInput = new DigitalInput(Constants.DigitalConstants.kFrontInput);
-        middleInput = new DigitalInput(Constants.DigitalConstants.kMiddleInput);
-        backInput = new DigitalInput(Constants.DigitalConstants.kBackInput);
+        frontInput = new DigitalInput(Constants.DigitalConstants.FRONT_INPUT);
+        rearInput = new DigitalInput(Constants.DigitalConstants.REAR_INPUT);
     }
 
     public static synchronized Index getInstance() {
@@ -52,13 +51,12 @@ public class Index extends ParagonSubsystemBase {
 
     @Override
     public String getName() {
-        // TODO Auto-generated method stub
         return name;
     }
 
     @Override
     public void stop() {
-        IndexMotor.stopMotor();
+        indexMotor.stopMotor();
 
     }
 
@@ -69,14 +67,11 @@ public class Index extends ParagonSubsystemBase {
         return frontInput.get();
     }
 
-    public boolean getMiddleInput() {
-        return middleInput.get();
+    public boolean getRearInput() {
+        return rearInput.get();
     }
 
-    public boolean getBackInput() {
-        return backInput.get();
-    }
     public void turn() {
-        IndexMotor.set(0.5);
+        indexMotor.set(0.5);
     }
 }

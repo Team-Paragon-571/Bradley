@@ -45,7 +45,7 @@ public class IntakeCommand extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if (index.getMiddleInput() || index.getBackInput()) {
+        if (index.getRearInput() || index.getRearInput()) {
             return true;
         }
         return false;
