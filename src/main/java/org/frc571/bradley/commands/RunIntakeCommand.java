@@ -1,18 +1,16 @@
 package org.frc571.bradley.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-
+import org.frc571.bradley.Constants.SpeedConstants;
 import org.frc571.bradley.subsystems.Intake;
 
-public class StopIntakeCommand extends CommandBase {
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-    private final Intake m_intake;
+public class RunIntakeCommand extends CommandBase {
 
-    public StopIntakeCommand() {
+    private Intake intake;
 
-        m_intake = Intake.getInstance();
-        addRequirements(m_intake);
-
+    public RunIntakeCommand() {
+        intake = Intake.getInstance();
     }
 
     @Override
@@ -21,13 +19,14 @@ public class StopIntakeCommand extends CommandBase {
 
     @Override
     public void execute() {
+        intake.setSpeed(SpeedConstants.kIntakeMotorSpeed);
     }
 
     @Override
     public void end(boolean interrupted) {
+        intake.stop();
     }
 
-    // Returns true when the command should end.
     @Override
     public boolean isFinished() {
         return false;
@@ -36,6 +35,5 @@ public class StopIntakeCommand extends CommandBase {
     @Override
     public boolean runsWhenDisabled() {
         return false;
-
     }
 }

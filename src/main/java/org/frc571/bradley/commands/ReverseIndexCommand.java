@@ -1,18 +1,14 @@
 package org.frc571.bradley.commands;
 
+import org.frc571.bradley.subsystems.Index;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import org.frc571.bradley.subsystems.Intake;
+public class ReverseIndexCommand extends CommandBase {
+    private Index index;
 
-public class StopIntakeCommand extends CommandBase {
-
-    private final Intake m_intake;
-
-    public StopIntakeCommand() {
-
-        m_intake = Intake.getInstance();
-        addRequirements(m_intake);
-
+    public ReverseIndexCommand() {
+        index = Index.getInstance();
     }
 
     @Override
@@ -21,13 +17,14 @@ public class StopIntakeCommand extends CommandBase {
 
     @Override
     public void execute() {
+        index.reverse();
     }
 
     @Override
     public void end(boolean interrupted) {
+        index.stop();
     }
 
-    // Returns true when the command should end.
     @Override
     public boolean isFinished() {
         return false;
@@ -36,6 +33,6 @@ public class StopIntakeCommand extends CommandBase {
     @Override
     public boolean runsWhenDisabled() {
         return false;
-
     }
+
 }
