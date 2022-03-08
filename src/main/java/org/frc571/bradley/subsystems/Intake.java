@@ -1,5 +1,8 @@
 package org.frc571.bradley.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import org.frc571.bradley.Constants.MotorConstants;
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
@@ -8,7 +11,7 @@ public class Intake extends ParagonSubsystemBase {
 
     private static Intake intake;
 
-    private Spark intakeMotor;
+    private CANSparkMax intakeMotor;
 
     private String name = "Intake";
 
@@ -16,8 +19,7 @@ public class Intake extends ParagonSubsystemBase {
      * Takes in game pieces off the floor
      */
     private Intake() {
-        intakeMotor = new Spark(MotorConstants.INTAKE_MOTOR);
-        addChild("IntakeMotor", intakeMotor);
+        intakeMotor = new CANSparkMax(MotorConstants.INTAKE_MOTOR, MotorType.kBrushless);
         intakeMotor.setInverted(false);
 
     }
