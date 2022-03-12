@@ -4,8 +4,9 @@ import org.frc571.bradley.commands.AutonomousCommand;
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
 import org.frc571.bradley.commands.IntakeCommand;
-import org.frc571.bradley.commands.LowerIntake;
-import org.frc571.bradley.commands.RaiseIntake;
+import org.frc571.bradley.commands.RaiseLowerIntake;
+import org.frc571.bradley.commands.RunIndexCommand;
+import org.frc571.bradley.commands.RunIntakeCommand;
 import org.frc571.bradley.commands.ShootCommand;
 import org.frc571.bradley.commands.StopIntakeCommand;
 import org.frc571.bradley.subsystems.Drive;
@@ -41,7 +42,7 @@ public class RobotContainer {
   public final Drive m_drive = Drive.getInstance();
   // Joysticks
   private final XboxController driveController = new XboxController(0);
-  private final XboxController operatorController = new XboxController(0);
+  private final XboxController operatorController = new XboxController(1);
 
   // A chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -65,7 +66,12 @@ public class RobotContainer {
 
     SmartDashboard.putData("Auto Mode", m_chooser);
 
-    SmartDashboard.putData("Intake Command", new IntakeCommand());
+    SmartDashboard.putData("Run Intake Command", new RunIntakeCommand());
+    SmartDashboard.putData("Run Index Command", new RunIndexCommand());
+    SmartDashboard.putData("Raise Intake Command", new RaiseLowerIntake(true));
+    SmartDashboard.putData("Lower Intake Command", new RaiseLowerIntake(false));
+    SmartDashboard.putData("Complete Intake Command", new IntakeCommand());
+    SmartDashboard.putData("Shoot Command", new ShootCommand());
   }
 
   public static RobotContainer getInstance() {
@@ -96,11 +102,11 @@ public class RobotContainer {
 
     final JoystickButton raiseIntakeButton = new JoystickButton(operatorController,
         XboxController.Button.kLeftBumper.value);
-    raiseIntakeButton.whenPressed(new RaiseIntake(), true);
+    raiseIntakeButton.whenPressed(new RaiseLowerIntake(true), true);
 
     final JoystickButton lowerIntakeButton = new JoystickButton(operatorController,
         XboxController.Button.kRightBumper.value);
-    lowerIntakeButton.whenPressed(new LowerIntake(), true);
+    lowerIntakeButton.whenPressed(new RaiseLowerIntake(false), true);
 
   }
 

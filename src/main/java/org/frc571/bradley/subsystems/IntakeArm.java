@@ -28,9 +28,11 @@ public class IntakeArm extends ParagonSubsystemBase {
         addChild("motorMaster", motorMaster);
         addChild("motorFollower", motorFollower);
 
+        motorMaster.configFactoryDefault();
+        motorFollower.configFactoryDefault();
+
+        motorMaster.setInverted(false);
         motorFollower.follow(motorMaster);
-        
-        motorMaster.setInverted(true);
         motorFollower.setInverted(InvertType.FollowMaster);
     }
 
@@ -63,15 +65,10 @@ public class IntakeArm extends ParagonSubsystemBase {
     }
 
     public boolean getLimitSwitchTop() {
-        return limitTop.get();
+        return !limitTop.get();
     }
 
     public boolean getLimitSwitchBottom() {
-        return limitBottom.get();
+        return !limitBottom.get();
     }
-
-    public boolean getLimitSwitchTripped() {
-        return limitBottom.get() || limitTop.get();
-    }
-
 }

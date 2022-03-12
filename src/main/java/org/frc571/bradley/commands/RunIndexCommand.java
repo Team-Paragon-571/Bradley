@@ -27,7 +27,7 @@ public class RunIndexCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (index.getFrontInput() && index.getBackInput());
+        return (index.getFrontInput() && index.getRearInput());
     }
 
     @Override

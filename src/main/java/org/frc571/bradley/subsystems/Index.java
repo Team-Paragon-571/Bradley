@@ -43,7 +43,7 @@ public class Index extends ParagonSubsystemBase {
     @Override
     public void outputTelemetry() {
         SmartDashboard.putBoolean(getName() + "/Front Input", frontInput.get());
-        SmartDashboard.putBoolean(getName() + "/Back Input", backInput.get());
+        SmartDashboard.putBoolean(getName() + "/Back Input", rearInput.get());
 
     }
 
@@ -75,6 +75,6 @@ public class Index extends ParagonSubsystemBase {
     }
 
     public void reverse() {
-        IndexMotor.set(-0.5);
+        indexMotor.set(-0.5);
     }
 }

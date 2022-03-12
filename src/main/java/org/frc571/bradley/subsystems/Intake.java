@@ -20,7 +20,7 @@ public class Intake extends ParagonSubsystemBase {
      */
     private Intake() {
         intakeMotor = new CANSparkMax(MotorConstants.INTAKE_MOTOR, MotorType.kBrushless);
-        intakeMotor.setInverted(false);
+        intakeMotor.setInverted(true);
 
     }
 
