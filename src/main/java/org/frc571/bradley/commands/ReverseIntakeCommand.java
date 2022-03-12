@@ -1,14 +1,15 @@
 package org.frc571.bradley.commands;
 
-import org.frc571.bradley.subsystems.Index;
+import org.frc571.bradley.Constants.SpeedConstants;
+import org.frc571.bradley.subsystems.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ReverseIndexCommand extends CommandBase {
-    private Index index;
+public class ReverseIntakeCommand extends CommandBase {
+    final private Intake intake;
 
-    public ReverseIndexCommand() {
-        index = Index.getInstance();
+    public ReverseIntakeCommand() {
+        intake = Intake.getInstance();
     }
 
     @Override
@@ -17,12 +18,12 @@ public class ReverseIndexCommand extends CommandBase {
 
     @Override
     public void execute() {
-        index.reverse();
+        intake.setSpeed(-SpeedConstants.kIntakeMotorSpeed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        index.stop();
+        intake.stop();
     }
 
     @Override

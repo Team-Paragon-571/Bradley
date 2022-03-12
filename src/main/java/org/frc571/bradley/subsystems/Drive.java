@@ -20,7 +20,7 @@ public class Drive extends ParagonSubsystemBase {
         rMaster = new WPI_TalonFX(3);
 
         lMaster.setInverted(true);
-        rMaster.setInverted(true);
+        rMaster.setInverted(false);
 
         addChild("lFront", lMaster);
         addChild("rFront", rMaster);
@@ -36,8 +36,8 @@ public class Drive extends ParagonSubsystemBase {
         lFollower.follow(lMaster);
         rFollower.follow(rMaster);
 
-        lFollower.setInverted(InvertType.OpposeMaster);
-        rFollower.setInverted(InvertType.OpposeMaster);
+        lFollower.setInverted(InvertType.FollowMaster);
+        rFollower.setInverted(InvertType.FollowMaster);
 
         differentialDrive = new DifferentialDrive(lMaster, rMaster);
         addChild("DifferentialDrive", differentialDrive);
@@ -119,8 +119,8 @@ public class Drive extends ParagonSubsystemBase {
     @Override
     public void outputTelemetry() {
         SmartDashboard.putNumber(getName() + "Drive/LeftMotor/Encoder",
-                getRFollowerMotor().getSelectedSensorPosition());
-        SmartDashboard.putNumber("Drive/RightMotor/Encoder", getLFollowerMotor().getSelectedSensorPosition());
+                getRMasterMotor().getSelectedSensorPosition());
+        SmartDashboard.putNumber("Drive/RightMotor/Encoder", getRMasterMotor().getSelectedSensorPosition());
         // TODO: add Pigeon IMU telemetry
         // SmartDashboard.putNumber(getName() + "Drive/Pigeon/Yaw", pigeon.getYaw());
 

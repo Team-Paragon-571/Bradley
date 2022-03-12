@@ -4,6 +4,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.frc571.bradley.Constants;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Shooter extends ParagonSubsystemBase {
     private static Shooter shooter;
     private String name = "shoot";
@@ -37,8 +39,7 @@ public class Shooter extends ParagonSubsystemBase {
 
     @Override
     public void outputTelemetry() {
-        // TODO: Put data on the smart dashboard
-
+        SmartDashboard.putData(shootMotor);
     }
 
     @Override

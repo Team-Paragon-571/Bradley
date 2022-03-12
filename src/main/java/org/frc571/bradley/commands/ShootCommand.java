@@ -27,6 +27,7 @@ public class ShootCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        m_shoot.stop();
     }
 
     // Returns true when the command should end.

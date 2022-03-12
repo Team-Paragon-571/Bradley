@@ -4,13 +4,16 @@ import org.frc571.bradley.commands.AutonomousCommand;
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
 import org.frc571.bradley.commands.IntakeCommand;
-import org.frc571.bradley.commands.RaiseLowerIntake;
+import org.frc571.bradley.commands.LowerIntake;
+import org.frc571.bradley.commands.RaiseIntake;
 import org.frc571.bradley.commands.ShootCommand;
 import org.frc571.bradley.commands.StopIntakeCommand;
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.subsystems.Index;
 import org.frc571.bradley.subsystems.Intake;
 import org.frc571.bradley.subsystems.Shooter;
+import org.frc571.bradley.subsystems.IntakeArms.ArmSide;
+import org.frc571.bradley.subsystems.IntakeArms.ArmDirection;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -96,11 +99,11 @@ public class RobotContainer {
 
     final JoystickButton raiseIntakeButton = new JoystickButton(operatorController,
         XboxController.Button.kLeftBumper.value);
-    raiseIntakeButton.whenPressed(new ParallelCommandGroup(new RaiseLowerIntake(true, true), new RaiseLowerIntake(true, false)), true);
+    raiseIntakeButton.whenPressed(new RaiseIntake());
 
     final JoystickButton lowerIntakeButton = new JoystickButton(operatorController,
         XboxController.Button.kRightBumper.value);
-    lowerIntakeButton.whenPressed(new ParallelCommandGroup(new RaiseLowerIntake(false, true), new RaiseLowerIntake(false, false)), true);
+    lowerIntakeButton.whenPressed(new LowerIntake());
 
   }
 

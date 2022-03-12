@@ -107,11 +107,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        double newPosition = m_robotContainer.getDrive().getLMasterMotor().getSelectedSensorPosition();
-        if (Math.abs(newPosition - oldPosition) > 1000) {
-            System.out.println("sensor position = " + newPosition);
-            oldPosition = newPosition;
-        }
+        
     }
 
     @Override

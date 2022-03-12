@@ -22,12 +22,12 @@ public class Constants {
     }
 
     public static final class MotorConstants {
-        public static final int kLeftIntakeArmPort = 5;
-        public static final int kRightIntakeArmPort = 6;
-        public static final int INTAKE_MOTOR = 6;
-        public static final int kLeftIndexMotor = 7;
-        public static final int kRightIndexMotor = 8;
-        public static final int kShooterMotor = 9;
+        public static final int kLeftIntakeArmPort = 7;
+        public static final int kRightIntakeArmPort = 8;
+        public static final int INTAKE_MOTOR = 9;
+        public static final int kLeftIndexMotor = 5;
+        public static final int kRightIndexMotor = 18;
+        public static final int kShooterMotor = 6;
     }
 
     public static final class ControlConstants {
@@ -36,13 +36,13 @@ public class Constants {
     }
 
     public static final class DigitalConstants {
-        public static final int TOP_LEFT_LIMIT_SWITCH = 7;
-        public static final int TOP_RIGHT_LIMIT_SWITCH = 8;
-        public static final int BOTTOM_LEFT_LIMIT_SWITCH = 9;
-        public static final int BOTTOM_RIGHT_LIMIT_SWITCH = 10;
-        public static final int kFrontInput = 11;
+        public static final int TOP_LEFT_LIMIT_SWITCH = 1;
+        public static final int TOP_RIGHT_LIMIT_SWITCH = 3;
+        public static final int BOTTOM_LEFT_LIMIT_SWITCH = 0;
+        public static final int BOTTOM_RIGHT_LIMIT_SWITCH = 2;
+        public static final int kFrontInput = 4;
         public static final int kMiddleInput = 12;
-        public static final int kBackInput = 13;
+        public static final int kBackInput = 5;
     }
 
     public static final class SpeedConstants {

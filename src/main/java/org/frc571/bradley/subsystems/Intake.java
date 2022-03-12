@@ -5,6 +5,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import org.frc571.bradley.Constants;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Intake extends ParagonSubsystemBase {
 
     private static Intake intake;
@@ -45,8 +47,7 @@ public class Intake extends ParagonSubsystemBase {
 
     @Override
     public void outputTelemetry() {
-        // TODO put data on the smart dashboard
-
+        SmartDashboard.putNumber("Intake Motor", intakeMotor.get());
     }
 
     @Override
