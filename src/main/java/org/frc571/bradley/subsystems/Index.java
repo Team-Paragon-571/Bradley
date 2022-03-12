@@ -1,24 +1,25 @@
 
 package org.frc571.bradley.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import org.frc571.bradley.Constants;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Index extends ParagonSubsystemBase {
     private static Index index;
 
     private String name = "Index";
-    private PWMVictorSPX IndexMotor;
+    private WPI_TalonSRX indexMotor;
     private DigitalInput frontInput;
     private DigitalInput backInput;
 
     private Index() {
-        IndexMotor = new PWMVictorSPX(Constants.MotorConstants.kLeftIndexMotor);
-        addChild("IndexMotor", IndexMotor);
-        IndexMotor.setInverted(false);
+        indexMotor = new WPI_TalonSRX(Constants.MotorConstants.kLeftIndexMotor);
+        addChild("IndexMotor", indexMotor);
+        indexMotor.setInverted(false);
 
         frontInput = new DigitalInput(Constants.DigitalConstants.kFrontInput);
         backInput = new DigitalInput(Constants.DigitalConstants.kBackInput);
@@ -53,7 +54,7 @@ public class Index extends ParagonSubsystemBase {
 
     @Override
     public void stop() {
-        IndexMotor.stopMotor();
+        indexMotor.stopMotor();
 
     }
 
@@ -69,10 +70,10 @@ public class Index extends ParagonSubsystemBase {
     }
 
     public void turn() {
-        IndexMotor.set(0.5);
+        indexMotor.set(0.5);
     }
 
     public void reverse() {
-        IndexMotor.set(-0.5);
+        indexMotor.set(-0.5);
     }
 }

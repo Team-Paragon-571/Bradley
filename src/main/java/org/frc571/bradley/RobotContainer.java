@@ -4,8 +4,7 @@ import org.frc571.bradley.commands.AutonomousCommand;
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
 import org.frc571.bradley.commands.IntakeCommand;
-import org.frc571.bradley.commands.LowerIntake;
-import org.frc571.bradley.commands.RaiseIntake;
+import org.frc571.bradley.commands.RaiseLowerIntake;
 import org.frc571.bradley.commands.ShootCommand;
 import org.frc571.bradley.commands.StopIntakeCommand;
 import org.frc571.bradley.subsystems.Drive;
@@ -18,10 +17,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.TimedRobot;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -97,12 +96,12 @@ public class RobotContainer {
 
     final JoystickButton raiseIntakeButton = new JoystickButton(operatorController,
         XboxController.Button.kLeftBumper.value);
-    raiseIntakeButton.whenPressed(new RaiseIntake(), true);
+    raiseIntakeButton.whenPressed(new ParallelCommandGroup(new RaiseLowerIntake(true, true), new RaiseLowerIntake(true, false)), true);
 
     final JoystickButton lowerIntakeButton = new JoystickButton(operatorController,
         XboxController.Button.kRightBumper.value);
-    lowerIntakeButton.whenPressed(new LowerIntake(), true);
-    
+    lowerIntakeButton.whenPressed(new ParallelCommandGroup(new RaiseLowerIntake(false, true), new RaiseLowerIntake(false, false)), true);
+
   }
 
   public XboxController getOperatorController() {

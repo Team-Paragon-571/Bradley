@@ -3,31 +3,24 @@ package org.frc571.bradley.subsystems;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.sensors.Pigeon2;
-import com.ctre.phoenix.sensors.PigeonIMU;
-import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drive extends ParagonSubsystemBase {
     private static Drive drive;
     private WPI_TalonFX lMaster;
     private WPI_TalonFX lFollower;
-    private MotorControllerGroup leftMotors;
     private WPI_TalonFX rMaster;
     private WPI_TalonFX rFollower;
-    private MotorControllerGroup rightMotors;
     private DifferentialDrive differentialDrive;
-    private WPI_Pigeon2 pigeon;
 
     private Drive() {
         lMaster = new WPI_TalonFX(1);
         rMaster = new WPI_TalonFX(3);
 
         lMaster.setInverted(true);
-        rMaster.setInverted(false);
+        rMaster.setInverted(true);
 
         addChild("lFront", lMaster);
         addChild("rFront", rMaster);
@@ -43,16 +36,14 @@ public class Drive extends ParagonSubsystemBase {
         lFollower.follow(lMaster);
         rFollower.follow(rMaster);
 
-        lFollower.setInverted(InvertType.FollowMaster);
-        rFollower.setInverted(InvertType.FollowMaster);
+        lFollower.setInverted(InvertType.OpposeMaster);
+        rFollower.setInverted(InvertType.OpposeMaster);
 
         differentialDrive = new DifferentialDrive(lMaster, rMaster);
         addChild("DifferentialDrive", differentialDrive);
         differentialDrive.setSafetyEnabled(true);
         differentialDrive.setExpiration(0.1);
         differentialDrive.setMaxOutput(1.0);
-
-        pigeon = new WPI_Pigeon2(20);
 
     }
 
