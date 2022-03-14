@@ -11,10 +11,10 @@ public class RaiseIntake extends CommandBase {
     final IntakeArms.ArmDirection dir;
 
     public RaiseIntake() {
-        this.dir = IntakeArms.ArmDirection.UP;
+        dir = IntakeArms.ArmDirection.UP;
         arm = IntakeArms.getInstance();
         
-        this.addRequirements(arm);
+        addRequirements(arm);
     }
 
     @Override

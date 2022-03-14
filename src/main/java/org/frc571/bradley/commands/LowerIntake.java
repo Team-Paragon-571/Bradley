@@ -12,10 +12,10 @@ public class LowerIntake extends CommandBase {
     final IntakeArms.ArmDirection dir;
 
     public LowerIntake() {
-        this.dir = IntakeArms.ArmDirection.DOWN;
+        dir = IntakeArms.ArmDirection.DOWN;
         arm = IntakeArms.getInstance();
         
-        this.addRequirements(arm);
+        addRequirements(arm);
     }
 
     @Override
