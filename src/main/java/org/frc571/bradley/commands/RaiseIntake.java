@@ -1,15 +1,19 @@
 package org.frc571.bradley.commands;
 
-import org.frc571.bradley.subsystems.IntakeArm;
+import org.frc571.bradley.subsystems.IntakeArms;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RaiseIntake extends CommandBase {
-    IntakeArm arm;
+    final IntakeArms arm;
+    boolean first = true;
+
+    final IntakeArms.ArmDirection dir;
 
     public RaiseIntake() {
-        arm = IntakeArm.getInstance();
-
+        dir = IntakeArms.ArmDirection.UP;
+        arm = IntakeArms.getInstance();
+        
         addRequirements(arm);
     }
 
@@ -20,10 +24,9 @@ public class RaiseIntake extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        arm.setSpeed(0.3);
+        arm.move(dir);
     }
 
-    // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         arm.stop();
@@ -32,12 +35,11 @@ public class RaiseIntake extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return arm.getLimitSwitchTop();
+        return arm.isTopLeftLimitSwitchPressed() && arm.isTopRightLimitSwitchPressed();
     }
 
     @Override
     public boolean runsWhenDisabled() {
         return false;
     }
-
 }

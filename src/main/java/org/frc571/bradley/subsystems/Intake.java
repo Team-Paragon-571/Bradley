@@ -1,12 +1,17 @@
 package org.frc571.bradley.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import org.frc571.bradley.Constants;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends ParagonSubsystemBase {
 
     private static Intake intake;
 
-    private PWMVictorSPX intakeMotor;
+    private CANSparkMax intakeMotor;
 
     private String name = "Intake";
 
@@ -14,9 +19,8 @@ public class Intake extends ParagonSubsystemBase {
      * Takes in game pieces off the floor
      */
     private Intake() {
-        intakeMotor = new PWMVictorSPX(5);
-        addChild("IntakeMotor", intakeMotor);
-        intakeMotor.setInverted(false);
+        intakeMotor = new CANSparkMax(Constants.MotorConstants.INTAKE_MOTOR, MotorType.kBrushless);
+        intakeMotor.setInverted(true);
 
     }
 
@@ -43,8 +47,7 @@ public class Intake extends ParagonSubsystemBase {
 
     @Override
     public void outputTelemetry() {
-        // TODO put data on the smart dashboard
-
+        SmartDashboard.putNumber("Intake Motor", intakeMotor.get());
     }
 
     @Override

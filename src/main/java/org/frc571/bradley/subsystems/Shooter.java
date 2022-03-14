@@ -1,16 +1,18 @@
 package org.frc571.bradley.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import org.frc571.bradley.Constants;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shooter extends ParagonSubsystemBase {
     private static Shooter shooter;
     private String name = "shoot";
-    private PWMVictorSPX shootMotor;
+    private WPI_TalonSRX shootMotor;
 
     private Shooter() {
-        shootMotor = new PWMVictorSPX(Constants.MotorConstants.kShooterMotor);
+        shootMotor = new WPI_TalonSRX(Constants.MotorConstants.kShooterMotor);
         addChild("ShootMotor", shootMotor);
         shootMotor.setInverted(false);
 
@@ -37,8 +39,7 @@ public class Shooter extends ParagonSubsystemBase {
 
     @Override
     public void outputTelemetry() {
-        // TODO: Put data on the smart dashboard
-
+        SmartDashboard.putData(shootMotor);
     }
 
     @Override
@@ -46,6 +47,7 @@ public class Shooter extends ParagonSubsystemBase {
 
         return name;
     }
+
     public void shoot() {
         shootMotor.set(Constants.ControlConstants.kShootMotor);
     }

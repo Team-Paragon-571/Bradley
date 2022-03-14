@@ -3,24 +3,17 @@ package org.frc571.bradley.subsystems;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.sensors.Pigeon2;
-import com.ctre.phoenix.sensors.PigeonIMU;
-import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drive extends ParagonSubsystemBase {
     private static Drive drive;
     private WPI_TalonFX lMaster;
     private WPI_TalonFX lFollower;
-    private MotorControllerGroup leftMotors;
     private WPI_TalonFX rMaster;
     private WPI_TalonFX rFollower;
-    private MotorControllerGroup rightMotors;
     private DifferentialDrive differentialDrive;
-    private WPI_Pigeon2 pigeon;
 
     private Drive() {
         lMaster = new WPI_TalonFX(1);
@@ -51,8 +44,6 @@ public class Drive extends ParagonSubsystemBase {
         differentialDrive.setSafetyEnabled(true);
         differentialDrive.setExpiration(0.1);
         differentialDrive.setMaxOutput(1.0);
-
-        pigeon = new WPI_Pigeon2(20);
 
     }
 
@@ -128,8 +119,8 @@ public class Drive extends ParagonSubsystemBase {
     @Override
     public void outputTelemetry() {
         SmartDashboard.putNumber(getName() + "Drive/LeftMotor/Encoder",
-                getRFollowerMotor().getSelectedSensorPosition());
-        SmartDashboard.putNumber("Drive/RightMotor/Encoder", getLFollowerMotor().getSelectedSensorPosition());
+                getRMasterMotor().getSelectedSensorPosition());
+        SmartDashboard.putNumber("Drive/RightMotor/Encoder", getRMasterMotor().getSelectedSensorPosition());
         // TODO: add Pigeon IMU telemetry
         // SmartDashboard.putNumber(getName() + "Drive/Pigeon/Yaw", pigeon.getYaw());
 
