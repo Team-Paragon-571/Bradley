@@ -12,15 +12,12 @@ import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.subsystems.Index;
 import org.frc571.bradley.subsystems.Intake;
 import org.frc571.bradley.subsystems.Shooter;
-import org.frc571.bradley.subsystems.IntakeArms.ArmSide;
-import org.frc571.bradley.subsystems.IntakeArms.ArmDirection;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -64,9 +61,10 @@ public class RobotContainer {
 
     // Configure default commands
     m_drive.setDefaultCommand(new DriveCommand(driveController::getLeftY, driveController::getRightX));
-
+    SmartDashboard.putNumber("AutonomousCommand/Autonomous timeout", 1.5);
     // Configure autonomous sendable chooser
-    m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand());
+    m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand().withTimeout(
+        SmartDashboard.getNumber("AutonomousCommand/Autonomous timeout", 1.5)));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
   }
