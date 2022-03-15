@@ -1,5 +1,6 @@
 package org.frc571.bradley;
 
+import org.frc571.bradley.Constants.AutonomousConstants;
 import org.frc571.bradley.commands.AutonomousCommand;
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
@@ -61,10 +62,14 @@ public class RobotContainer {
 
     // Configure default commands
     m_drive.setDefaultCommand(new DriveCommand(driveController::getLeftY, driveController::getRightX));
-    SmartDashboard.putNumber("AutonomousCommand/Autonomous timeout", 1.5);
+    if (!SmartDashboard.containsKey("AutonomousCommand/Autonomous timeout")) {
+      SmartDashboard.putNumber("AutonomousCommand/Autonomous timeout",
+          AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
+    }
     // Configure autonomous sendable chooser
     m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand().withTimeout(
-        SmartDashboard.getNumber("AutonomousCommand/Autonomous timeout", 1.5)));
+        SmartDashboard.getNumber("AutonomousCommand/Autonomous timeout",
+            AutonomousConstants.AUTONOMOUS_COMMAND_DURATION)));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
   }
