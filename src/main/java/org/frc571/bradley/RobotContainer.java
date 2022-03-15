@@ -10,7 +10,7 @@ import org.frc571.bradley.commands.RaiseIntake;
 import org.frc571.bradley.commands.ShootCommand;
 import org.frc571.bradley.commands.StopIntakeCommand;
 import org.frc571.bradley.subsystems.Drive;
-import org.frc571.bradley.subsystems.Index;
+import org.frc571.bradley.subsystems.Hopper;
 import org.frc571.bradley.subsystems.Intake;
 import org.frc571.bradley.subsystems.Shooter;
 
@@ -39,7 +39,7 @@ public class RobotContainer {
 
   // The robot's subsystems
   public final Shooter m_shoot = Shooter.getInstance();
-  public final Index m_index = Index.getInstance();
+  public final Hopper m_hopper = Hopper.getInstance();
   public final Intake m_intake = Intake.getInstance();
   public final Drive m_drive = Drive.getInstance();
   // Joysticks

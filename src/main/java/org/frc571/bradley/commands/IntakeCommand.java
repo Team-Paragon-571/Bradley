@@ -9,7 +9,7 @@ public class IntakeCommand extends SequentialCommandGroup {
         new LowerIntake();
 
         new ParallelDeadlineGroup(
-                new RunIndexCommand(),
+                new RunHopperCommand(),
                 new RunIntakeCommand());
 
         new RaiseIntake();
