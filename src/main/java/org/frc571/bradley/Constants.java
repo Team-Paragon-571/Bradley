@@ -50,8 +50,4 @@ public class Constants {
         public static final double RAISE_INTAKE_SPEED = 0.3;
 
     }
-
-    public static final class AutonomousConstants {
-        public static final double AUTONOMOUS_COMMAND_DURATION = 1.5;
-    }
 }
