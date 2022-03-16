@@ -19,8 +19,8 @@ public class Drive extends ParagonSubsystemBase {
         lMaster = new WPI_TalonFX(1);
         rMaster = new WPI_TalonFX(3);
 
-        lMaster.setInverted(true);
-        rMaster.setInverted(false);
+        lMaster.setInverted(false);
+        rMaster.setInverted(true);
 
         addChild("lFront", lMaster);
         addChild("rFront", rMaster);
