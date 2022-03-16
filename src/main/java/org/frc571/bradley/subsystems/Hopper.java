@@ -1,6 +1,7 @@
 
 package org.frc571.bradley.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.frc571.bradley.Constants;
@@ -23,6 +24,7 @@ public class Hopper extends ParagonSubsystemBase {
 
         frontInput = new DigitalInput(Constants.DigitalConstants.kFrontInput);
         backInput = new DigitalInput(Constants.DigitalConstants.kBackInput);
+        hopperMotor.setNeutralMode(NeutralMode.Coast);
     }
 
     public static synchronized Hopper getInstance() {

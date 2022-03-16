@@ -42,8 +42,13 @@ public class IntakeArms extends ParagonSubsystemBase {
         limitBottomLeft = new DigitalInput(DigitalConstants.BOTTOM_LEFT_LIMIT_SWITCH);
         limitBottomRight = new DigitalInput(DigitalConstants.BOTTOM_RIGHT_LIMIT_SWITCH);
 
+
         motorLeft.restoreFactoryDefaults();
         motorRight.restoreFactoryDefaults();
+
+        motorLeft.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        motorRight.setIdleMode(CANSparkMax.IdleMode.kBrake);
+
     }
 
     public static synchronized IntakeArms getInstance() {
