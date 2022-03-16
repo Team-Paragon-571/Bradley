@@ -1,44 +1,14 @@
 package org.frc571.bradley.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import java.util.function.DoubleSupplier;
 
-import org.frc571.bradley.subsystems.Shooter;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class ShootCommand extends CommandBase {
-
-    private final Shooter m_shoot;
-
-    public ShootCommand() {
-
-        m_shoot = Shooter.getInstance();
-        addRequirements(m_shoot);
-        
+public class ShootCommand extends SequentialCommandGroup {
+    public ShootCommand(DoubleSupplier fire) {
+        addCommands(
+                new ReverseHopperCommand().withTimeout(0.3),
+                new FireCommand(fire));
     }
 
-    @Override
-    public void initialize() {
-    }
-
-    // Called every time the scheduler runs while the command is scheduled.
-    @Override
-    public void execute() {
-        m_shoot.shoot();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        m_shoot.stop();
-    }
-
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
-
-    @Override
-    public boolean runsWhenDisabled() {
-        return false;
-
-    }
 }
