@@ -16,6 +16,7 @@ import org.frc571.bradley.subsystems.Intake;
 import org.frc571.bradley.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -39,12 +40,11 @@ public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
 
   // Subsystems
-  public final Shooter m_shoot = Shooter.getInstance();
+  public final Shooter m_shooter = Shooter.getInstance();
   public final Hopper m_hopper = Hopper.getInstance();
   public final Intake m_intake = Intake.getInstance();
   public final Drive m_drive = Drive.getInstance();
-  public final Shooter shooter = Shooter.getInstance();
-  public final Hopper hopper = Hopper.getInstance();
+  
   // Joysticks
   private final XboxController driveController = new XboxController(0);
 
@@ -64,8 +64,8 @@ public class RobotContainer {
 
     // Configure default commands
     m_drive.setDefaultCommand(new DriveCommand(driveController::getLeftY, driveController::getRightX));
-    shooter.setDefaultCommand(new RevCommand(driveController::getLeftTriggerAxis));
-    hopper.setDefaultCommand(new ShootCommand(driveController::getRightTriggerAxis));
+    m_shooter.setDefaultCommand(new RevCommand(driveController::getLeftTriggerAxis));
+    m_hopper.setDefaultCommand(new ShootCommand(driveController::getRightTriggerAxis));
 
     if (!SmartDashboard.containsKey("AutonomousCommand/Autonomous timeout")) {
       SmartDashboard.putNumber("AutonomousCommand/Autonomous timeout",
@@ -110,7 +110,6 @@ public class RobotContainer {
     final JoystickButton lowerIntakeButton = new JoystickButton(driveController,
         XboxController.Button.kRightBumper.value);
     lowerIntakeButton.whenPressed(new LowerIntake());
-
   }
 
   public XboxController getDriveController() {

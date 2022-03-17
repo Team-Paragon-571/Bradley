@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import java.util.function.DoubleSupplier;
 
+import org.frc571.bradley.Constants.SpeedConstants;
 import org.frc571.bradley.subsystems.Shooter;
 
 public class RevCommand extends CommandBase {
@@ -25,7 +26,7 @@ public class RevCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        shooter.shoot(speed.getAsDouble());
+        shooter.shoot(speed.getAsDouble() * SpeedConstants.FLYWHEEL_MAX_SPEED);
     }
 
     @Override

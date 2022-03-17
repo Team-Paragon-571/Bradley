@@ -12,19 +12,21 @@ public class FireCommand extends CommandBase {
     private DoubleSupplier fire;
 
     public FireCommand(DoubleSupplier fire) {
+        hopper = Hopper.getInstance();
         this.fire = fire;
         addRequirements(hopper);
     }
 
     @Override
     public void initialize() {
-        hopper.reverse();
     }
 
     @Override
     public void execute() {
         if (fire.getAsDouble() > ControlConstants.FIRE_COMMAND_THRESHOLD) {
             hopper.turn();
+        } else {
+            hopper.stop();
         }
     }
 
