@@ -1,6 +1,7 @@
 
 package org.frc571.bradley.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.frc571.bradley.Constants;
@@ -8,28 +9,29 @@ import org.frc571.bradley.Constants;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Index extends ParagonSubsystemBase {
-    private static Index index;
+public class Hopper extends ParagonSubsystemBase {
+    private static Hopper hopper;
 
     private String name = "Index";
-    private WPI_TalonSRX indexMotor;
+    private WPI_TalonSRX hopperMotor;
     private DigitalInput frontInput;
     private DigitalInput backInput;
 
-    private Index() {
-        indexMotor = new WPI_TalonSRX(Constants.MotorConstants.kLeftIndexMotor);
-        addChild("IndexMotor", indexMotor);
-        indexMotor.setInverted(false);
+    private Hopper() {
+        hopperMotor = new WPI_TalonSRX(Constants.MotorConstants.kLeftIndexMotor);
+        addChild("IndexMotor", hopperMotor);
+        hopperMotor.setInverted(false);
 
         frontInput = new DigitalInput(Constants.DigitalConstants.kFrontInput);
         backInput = new DigitalInput(Constants.DigitalConstants.kBackInput);
+        hopperMotor.setNeutralMode(NeutralMode.Coast);
     }
 
-    public static synchronized Index getInstance() {
-        if (index == null) {
-            index = new Index();
+    public static synchronized Hopper getInstance() {
+        if (hopper == null) {
+            hopper = new Hopper();
         }
-        return index;
+        return hopper;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class Index extends ParagonSubsystemBase {
 
     @Override
     public void stop() {
-        indexMotor.stopMotor();
+        hopperMotor.stopMotor();
 
     }
 
@@ -70,10 +72,10 @@ public class Index extends ParagonSubsystemBase {
     }
 
     public void turn() {
-        indexMotor.set(0.5);
+        hopperMotor.set(0.5);
     }
 
     public void reverse() {
-        indexMotor.set(-0.5);
+        hopperMotor.set(-0.5);
     }
 }
