@@ -89,13 +89,13 @@ public class RobotContainer {
    * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
-   * it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
+   * it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}. */
   private void configureButtonBindings() {
     // Create some buttons
-    final JoystickButton ejectButton = new JoystickButton(driveController, XboxController.Button.kX.value);
-    ejectButton.whenPressed(new EjectCommand(), true);
+    final JoystickButton ejectButton = new JoystickButton(driveController, XboxController.Button.kY.value);
+    ejectButton.whileHeld(new EjectCommand(), true);
+    ejectButton.whenPressed(new LowerIntake());
+    ejectButton.whenReleased(new RaiseIntake());
 
     final JoystickButton stopIntakeButton = new JoystickButton(driveController, XboxController.Button.kB.value);
     stopIntakeButton.whenPressed(new StopIntakeCommand(), true);
