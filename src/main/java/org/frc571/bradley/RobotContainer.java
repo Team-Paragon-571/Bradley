@@ -4,11 +4,12 @@ import org.frc571.bradley.Constants.AutonomousConstants;
 import org.frc571.bradley.commands.AutonomousCommand;
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
+import org.frc571.bradley.commands.FireCommand;
 import org.frc571.bradley.commands.IntakeCommand;
 import org.frc571.bradley.commands.LowerIntake;
 import org.frc571.bradley.commands.RaiseIntake;
 import org.frc571.bradley.commands.RevCommand;
-import org.frc571.bradley.commands.ShootCommand;
+import org.frc571.bradley.commands.ReverseHopperCommand;
 import org.frc571.bradley.commands.StopIntakeCommand;
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.subsystems.Hopper;
@@ -21,7 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.cameraserver.CameraServer;
 
 /**
@@ -64,7 +65,7 @@ public class RobotContainer {
     // Configure default commands
     m_drive.setDefaultCommand(new DriveCommand(driveController::getLeftY, driveController::getRightX));
     m_shooter.setDefaultCommand(new RevCommand(driveController::getLeftTriggerAxis));
-    m_hopper.setDefaultCommand(new ShootCommand(driveController::getRightTriggerAxis));
+    m_hopper.setDefaultCommand(new FireCommand(driveController::getRightTriggerAxis));
 
     if (!SmartDashboard.containsKey("AutonomousCommand/Autonomous timeout")) {
       SmartDashboard.putNumber("AutonomousCommand/Autonomous timeout",
@@ -102,13 +103,15 @@ public class RobotContainer {
     final JoystickButton intakeButton = new JoystickButton(driveController, XboxController.Button.kA.value);
     intakeButton.whenPressed(new IntakeCommand(), true);
 
-    final JoystickButton raiseIntakeButton = new JoystickButton(driveController,
-        XboxController.Button.kLeftBumper.value);
+    final POVButton raiseIntakeButton = new POVButton(driveController, 0);
     raiseIntakeButton.whenPressed(new RaiseIntake());
 
-    final JoystickButton lowerIntakeButton = new JoystickButton(driveController,
-        XboxController.Button.kRightBumper.value);
+    final POVButton lowerIntakeButton = new POVButton(driveController, 180);
     lowerIntakeButton.whenPressed(new LowerIntake());
+
+    final JoystickButton backOffButton = new JoystickButton(driveController, 
+      XboxController.Button.kRightBumper.value);
+    backOffButton.whileHeld(new ReverseHopperCommand());
   }
 
   public XboxController getDriveController() {
