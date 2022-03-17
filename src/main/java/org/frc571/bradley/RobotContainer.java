@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -60,16 +61,15 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    // Configure default commands
+    // Configure default commands0
     m_drive.setDefaultCommand(new DriveCommand(driveController::getLeftY, driveController::getRightX));
-    if (!SmartDashboard.containsKey("AutonomousCommand/Autonomous timeout")) {
+    if(!SmartDashboard.containsKey("AutonomousCommand/Autonomous timeout")) {
       SmartDashboard.putNumber("AutonomousCommand/Autonomous timeout",
-          AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
+      AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
     }
-    // Configure autonomous sendable chooser
-    m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand().withTimeout(
-        SmartDashboard.getNumber("AutonomousCommand/Autonomous timeout",
-            AutonomousConstants.AUTONOMOUS_COMMAND_DURATION)));
+    double duration = SmartDashboard.getNumber("AutonomousCommand/Autonomous timeout",
+    AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
+    m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand().raceWith(new WaitCommand(duration)));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
   }

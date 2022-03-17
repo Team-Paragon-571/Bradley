@@ -98,8 +98,6 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
-        System.out.println(
-                "sensor position = " + m_robotContainer.getDrive().getLMasterMotor().getSelectedSensorPosition());
     }
 
     /**
