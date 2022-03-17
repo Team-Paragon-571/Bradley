@@ -4,10 +4,12 @@ import org.frc571.bradley.Constants.AutonomousConstants;
 import org.frc571.bradley.commands.AutonomousCommand;
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
+import org.frc571.bradley.commands.FireCommand;
 import org.frc571.bradley.commands.IntakeCommand;
 import org.frc571.bradley.commands.LowerIntake;
 import org.frc571.bradley.commands.RaiseIntake;
-import org.frc571.bradley.commands.ShootCommand;
+import org.frc571.bradley.commands.RevCommand;
+import org.frc571.bradley.commands.ReverseHopperCommand;
 import org.frc571.bradley.commands.StopIntakeCommand;
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.subsystems.Hopper;
@@ -21,7 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.cameraserver.CameraServer;
 
 /**
@@ -38,14 +40,14 @@ public class RobotContainer {
 
   private static RobotContainer m_robotContainer = new RobotContainer();
 
-  // The robot's subsystems
-  public final Shooter m_shoot = Shooter.getInstance();
+  // Subsystems
+  public final Shooter m_shooter = Shooter.getInstance();
   public final Hopper m_hopper = Hopper.getInstance();
   public final Intake m_intake = Intake.getInstance();
   public final Drive m_drive = Drive.getInstance();
+  
   // Joysticks
   private final XboxController driveController = new XboxController(0);
-  private final XboxController operatorController = new XboxController(0);
 
   // A chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -63,6 +65,9 @@ public class RobotContainer {
 
     // Configure default commands0
     m_drive.setDefaultCommand(new DriveCommand(driveController::getLeftY, driveController::getRightX));
+    m_shooter.setDefaultCommand(new RevCommand(driveController::getLeftTriggerAxis));
+    m_hopper.setDefaultCommand(new FireCommand(driveController::getRightTriggerAxis));
+
     if(!SmartDashboard.containsKey("AutonomousCommand/Autonomous timeout")) {
       SmartDashboard.putNumber("AutonomousCommand/Autonomous timeout",
       AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
@@ -72,6 +77,7 @@ public class RobotContainer {
     m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand().raceWith(new WaitCommand(duration)));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
+
   }
 
   public static RobotContainer getInstance() {
@@ -94,23 +100,21 @@ public class RobotContainer {
     final JoystickButton stopIntakeButton = new JoystickButton(driveController, XboxController.Button.kB.value);
     stopIntakeButton.whenPressed(new StopIntakeCommand(), true);
 
-    final JoystickButton shootButton = new JoystickButton(driveController, XboxController.Button.kY.value);
-    shootButton.whileHeld(new ShootCommand(), true);
-
     final JoystickButton intakeButton = new JoystickButton(driveController, XboxController.Button.kA.value);
     intakeButton.whenPressed(new IntakeCommand(), true);
 
-    final JoystickButton raiseIntakeButton = new JoystickButton(operatorController,
-        XboxController.Button.kLeftBumper.value);
+    final POVButton raiseIntakeButton = new POVButton(driveController, 0);
     raiseIntakeButton.whenPressed(new RaiseIntake());
 
-    final JoystickButton lowerIntakeButton = new JoystickButton(operatorController,
-        XboxController.Button.kRightBumper.value);
+    final POVButton lowerIntakeButton = new POVButton(driveController, 180);
     lowerIntakeButton.whenPressed(new LowerIntake());
 
+    final JoystickButton backOffButton = new JoystickButton(driveController, 
+      XboxController.Button.kRightBumper.value);
+    backOffButton.whileHeld(new ReverseHopperCommand());
   }
 
-  public XboxController getOperatorController() {
+  public XboxController getDriveController() {
     return driveController;
   }
 

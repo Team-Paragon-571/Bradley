@@ -33,6 +33,8 @@ public class Constants {
     public static final class ControlConstants {
         public static final double kDeadzone = 0.3;
         public static final double kShootMotor = 0.5;
+        public static final double FIRE_COMMAND_END = 0.1;
+        public static final double FIRE_COMMAND_THRESHOLD = 0.5;
     }
 
     public static final class DigitalConstants {
@@ -48,6 +50,7 @@ public class Constants {
     public static final class SpeedConstants {
         public static final double kIntakeMotorSpeed = 0.5;
         public static final double RAISE_INTAKE_SPEED = 0.3;
+        public static final double FLYWHEEL_MAX_SPEED = 0.8;
 
     }
 

@@ -21,6 +21,7 @@ public class Hopper extends ParagonSubsystemBase {
         hopperMotor = new WPI_TalonSRX(Constants.MotorConstants.kLeftIndexMotor);
         addChild("IndexMotor", hopperMotor);
         hopperMotor.setInverted(false);
+        hopperMotor.setNeutralMode(NeutralMode.Brake);
 
         frontInput = new DigitalInput(Constants.DigitalConstants.kFrontInput);
         backInput = new DigitalInput(Constants.DigitalConstants.kBackInput);

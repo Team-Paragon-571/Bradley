@@ -50,8 +50,8 @@ public class Shooter extends ParagonSubsystemBase {
         return name;
     }
 
-    public void shoot() {
-        shootMotor.set(Constants.ControlConstants.kShootMotor);
+    public void shoot(double speed) {
+        shootMotor.set(speed);
     }
 
     @Override
