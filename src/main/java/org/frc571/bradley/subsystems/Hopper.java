@@ -25,7 +25,6 @@ public class Hopper extends ParagonSubsystemBase {
 
         frontInput = new DigitalInput(Constants.DigitalConstants.kFrontInput);
         backInput = new DigitalInput(Constants.DigitalConstants.kBackInput);
-        hopperMotor.setNeutralMode(NeutralMode.Coast);
     }
 
     public static synchronized Hopper getInstance() {
@@ -65,11 +64,11 @@ public class Hopper extends ParagonSubsystemBase {
     // here. Call these from Commands.
 
     public boolean getFrontInput() {
-        return frontInput.get();
+        return !frontInput.get();
     }
 
     public boolean getBackInput() {
-        return backInput.get();
+        return !backInput.get();
     }
 
     public void turn() {

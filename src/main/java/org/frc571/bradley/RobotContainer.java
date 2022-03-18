@@ -10,6 +10,8 @@ import org.frc571.bradley.commands.LowerIntake;
 import org.frc571.bradley.commands.RaiseIntake;
 import org.frc571.bradley.commands.RevCommand;
 import org.frc571.bradley.commands.ReverseHopperCommand;
+import org.frc571.bradley.commands.RunHopperCommand;
+import org.frc571.bradley.commands.RunIntakeCommand;
 import org.frc571.bradley.commands.StopIntakeCommand;
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.subsystems.Hopper;
@@ -21,6 +23,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -93,15 +96,18 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Create some buttons
     final JoystickButton ejectButton = new JoystickButton(driveController, XboxController.Button.kY.value);
-    ejectButton.whileHeld(new EjectCommand(), true);
     ejectButton.whenPressed(new LowerIntake());
-    ejectButton.whenReleased(new RaiseIntake());
+    ejectButton.whileHeld(new EjectCommand(), true);
 
     final JoystickButton stopIntakeButton = new JoystickButton(driveController, XboxController.Button.kB.value);
     stopIntakeButton.whenPressed(new StopIntakeCommand(), true);
 
     final JoystickButton intakeButton = new JoystickButton(driveController, XboxController.Button.kA.value);
     intakeButton.whenPressed(new IntakeCommand(), true);
+    // intakeButton.whenPressed(
+    //             new ParallelDeadlineGroup(
+    //                     new RunHopperCommand(),
+    //                     new RunIntakeCommand()));
 
     final POVButton raiseIntakeButton = new POVButton(driveController, 0);
     raiseIntakeButton.whenPressed(new RaiseIntake());
