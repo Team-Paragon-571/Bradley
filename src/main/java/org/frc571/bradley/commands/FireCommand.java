@@ -1,19 +1,14 @@
 package org.frc571.bradley.commands;
 
-import java.util.function.DoubleSupplier;
-
-import org.frc571.bradley.Constants.ControlConstants;
 import org.frc571.bradley.subsystems.Hopper;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class FireCommand extends CommandBase {
     private Hopper hopper;
-    private DoubleSupplier fire;
 
-    public FireCommand(DoubleSupplier fire) {
+    public FireCommand() {
         hopper = Hopper.getInstance();
-        this.fire = fire;
         addRequirements(hopper);
     }
 
@@ -23,11 +18,7 @@ public class FireCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if (fire.getAsDouble() > ControlConstants.FIRE_COMMAND_THRESHOLD) {
-            hopper.turn();
-        } else {
-            hopper.stop();
-        }
+        hopper.turn();
     }
 
     @Override
