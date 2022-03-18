@@ -101,10 +101,6 @@ public class RobotContainer {
 
     final JoystickButton intakeButton = new JoystickButton(driveController, XboxController.Button.kA.value);
     intakeButton.whenPressed(new IntakeCommand(), true);
-    // intakeButton.whenPressed(
-    //             new ParallelDeadlineGroup(
-    //                     new RunHopperCommand(),
-    //                     new RunIntakeCommand()));
 
     final POVButton raiseIntakeButton = new POVButton(driveController, 0);
     raiseIntakeButton.whenPressed(new RaiseIntake());
