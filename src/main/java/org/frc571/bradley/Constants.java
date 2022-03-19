@@ -56,6 +56,6 @@ public class Constants {
 
     public static final class AutonomousConstants {
         public static final double AUTONOMOUS_COMMAND_DURATION = 1.5;
-        public static final double AUTONOMOUS_COMMAND_SPEED = 0.5;
+        public static final double AUTONOMOUS_COMMAND_SPEED = -0.25;
     }
 }
