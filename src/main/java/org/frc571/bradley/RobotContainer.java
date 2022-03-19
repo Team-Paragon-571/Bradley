@@ -12,6 +12,7 @@ import org.frc571.bradley.commands.RaiseIntake;
 import org.frc571.bradley.commands.RevCommand;
 import org.frc571.bradley.commands.ReverseHopperCommand;
 import org.frc571.bradley.commands.StopIntakeCommand;
+import org.frc571.bradley.commands.ToggleDirectionCommand;
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.subsystems.Hopper;
 import org.frc571.bradley.subsystems.Intake;
@@ -46,7 +47,7 @@ public class RobotContainer {
   public final Hopper m_hopper = Hopper.getInstance();
   public final Intake m_intake = Intake.getInstance();
   public final Drive m_drive = Drive.getInstance();
-  
+
   // Joysticks
   private final XboxController driveController = new XboxController(0);
 
@@ -69,12 +70,12 @@ public class RobotContainer {
     m_shooter.setDefaultCommand(new RevCommand(driveController::getLeftTriggerAxis));
     m_hopper.setDefaultCommand(new FireCommand(driveController::getRightTriggerAxis));
 
-    if(!SmartDashboard.containsKey("AutonomousCommand/Autonomous timeout")) {
+    if (!SmartDashboard.containsKey("AutonomousCommand/Autonomous timeout")) {
       SmartDashboard.putNumber("AutonomousCommand/Autonomous timeout",
-      AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
+          AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
     }
     double duration = SmartDashboard.getNumber("AutonomousCommand/Autonomous timeout",
-    AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
+        AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
     m_chooser.setDefaultOption("ShootDrive", new AutonomousShootDriveCommand());
     m_chooser.addOption("AutonomousDrive", new AutonomousDriveCommand());
     SmartDashboard.putData("Auto Mode", m_chooser);
@@ -90,7 +91,8 @@ public class RobotContainer {
    * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
-   * it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}. */
+   * it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   */
   private void configureButtonBindings() {
     // Create some buttons
     final JoystickButton ejectButton = new JoystickButton(driveController, XboxController.Button.kY.value);
@@ -109,9 +111,13 @@ public class RobotContainer {
     final POVButton lowerIntakeButton = new POVButton(driveController, 180);
     lowerIntakeButton.whenPressed(new LowerIntake());
 
-    final JoystickButton backOffButton = new JoystickButton(driveController, 
-      XboxController.Button.kRightBumper.value);
+    final JoystickButton backOffButton = new JoystickButton(driveController,
+        XboxController.Button.kRightBumper.value);
     backOffButton.whileHeld(new ReverseHopperCommand());
+
+    final JoystickButton toggleDirectionButton = new JoystickButton(driveController,
+        XboxController.Button.kLeftStick.value);
+    toggleDirectionButton.whenPressed(new ToggleDirectionCommand());
   }
 
   public XboxController getDriveController() {

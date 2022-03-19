@@ -15,6 +15,7 @@ public class Drive extends ParagonSubsystemBase {
     private WPI_TalonFX rMaster;
     private WPI_TalonFX rFollower;
     private DifferentialDrive differentialDrive;
+    private boolean direction = true;
 
     private Drive() {
         lMaster = new WPI_TalonFX(1);
@@ -82,7 +83,7 @@ public class Drive extends ParagonSubsystemBase {
      * @param isSpinning whether or not the robot is spinning in place
      */
     public void drive(double speed, double curvature, boolean isSpinning) {
-        differentialDrive.curvatureDrive(speed, curvature, isSpinning);
+        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1), curvature, isSpinning);
     }
 
     /**
@@ -140,6 +141,14 @@ public class Drive extends ParagonSubsystemBase {
     @Override
     public String getName() {
         return "Drive";
+    }
+
+    public void toggleDirection() {
+        direction = !direction;
+    }
+
+    public boolean getDirection() {
+        return direction;
     }
 
 }
