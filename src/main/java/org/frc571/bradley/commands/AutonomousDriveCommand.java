@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.Constants.AutonomousConstants;
 
-public class AutonomousCommand extends CommandBase {
+public class AutonomousDriveCommand extends CommandBase {
 
     private final Drive drive;
     private double speed = SmartDashboard.getNumber("AutonomousCommand/Autonomous timeout",
             AutonomousConstants.AUTONOMOUS_COMMAND_SPEED);
 
-    public AutonomousCommand() {
+    public AutonomousDriveCommand() {
 
         drive = Drive.getInstance();
         addRequirements(drive);

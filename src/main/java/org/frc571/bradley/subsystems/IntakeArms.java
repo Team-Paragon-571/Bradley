@@ -49,6 +49,8 @@ public class IntakeArms extends ParagonSubsystemBase {
         motorLeft.setIdleMode(CANSparkMax.IdleMode.kBrake);
         motorRight.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
+        // motorLeft.setSmartCurrentLimit(limit)
+
     }
 
     public static synchronized IntakeArms getInstance() {

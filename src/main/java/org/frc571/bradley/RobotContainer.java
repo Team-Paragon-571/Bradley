@@ -1,7 +1,8 @@
 package org.frc571.bradley;
 
 import org.frc571.bradley.Constants.AutonomousConstants;
-import org.frc571.bradley.commands.AutonomousCommand;
+import org.frc571.bradley.commands.AutonomousDriveCommand;
+import org.frc571.bradley.commands.AutonomousShootDriveCommand;
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
 import org.frc571.bradley.commands.FireCommand;
@@ -74,8 +75,8 @@ public class RobotContainer {
     }
     double duration = SmartDashboard.getNumber("AutonomousCommand/Autonomous timeout",
     AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
-    m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand().raceWith(new WaitCommand(duration)));
-
+    m_chooser.setDefaultOption("ShootDrive", new AutonomousShootDriveCommand());
+    m_chooser.addOption("AutonomousDrive", new AutonomousDriveCommand());
     SmartDashboard.putData("Auto Mode", m_chooser);
 
   }
