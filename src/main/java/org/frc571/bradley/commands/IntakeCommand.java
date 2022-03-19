@@ -14,8 +14,7 @@ public class IntakeCommand extends SequentialCommandGroup {
                         new RunHopperCommand(),
                         new RunIntakeCommand()),
                 new ParallelCommandGroup(
-                        new ReverseHopperCommand().withTimeout(0.2),
-                        new ReverseIntakeCommand().withTimeout(0.5)));
+                        new ReverseHopperCommand().withTimeout(0.2)));
     }
 
     // Called when the command is initially scheduled.
