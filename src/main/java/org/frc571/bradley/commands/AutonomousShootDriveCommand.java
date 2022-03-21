@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class AutonomousShootDriveCommand extends SequentialCommandGroup {
-        public AutonomousShootDriveCommand() {
+        public AutonomousShootDriveCommand(double timeout) {
                 addCommands(
                                 new ParallelRaceGroup(
                                 new RevCommand(() -> 1).withTimeout(2),
