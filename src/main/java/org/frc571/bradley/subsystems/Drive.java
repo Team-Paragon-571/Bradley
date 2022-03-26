@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -16,8 +17,11 @@ public class Drive extends ParagonSubsystemBase {
     private WPI_TalonFX rFollower;
     private DifferentialDrive differentialDrive;
     private boolean direction = true;
+    private SlewRateLimiter filter;
 
     private Drive() {
+        filter = new SlewRateLimiter(0.5);
+        
         lMaster = new WPI_TalonFX(1);
         rMaster = new WPI_TalonFX(3);
 
@@ -83,7 +87,7 @@ public class Drive extends ParagonSubsystemBase {
      * @param isSpinning whether or not the robot is spinning in place
      */
     public void drive(double speed, double curvature, boolean isSpinning) {
-        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1), curvature, isSpinning);
+        differentialDrive.curvatureDrive(filter.calculate(speed) * (direction ? 1 : -1), curvature, isSpinning);
     }
 
     /**
