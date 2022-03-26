@@ -17,6 +17,8 @@ public class Drive extends ParagonSubsystemBase {
     private DifferentialDrive differentialDrive;
     private boolean direction = true;
     private double maxOutput = 1.0;
+    private double maxForwardSpeed = 0.6;
+    private double maxTurnSpeed = 0.3;
 
     private Drive() {
         lMaster = new WPI_TalonFX(1);
@@ -52,8 +54,14 @@ public class Drive extends ParagonSubsystemBase {
         differentialDrive.setExpiration(0.1);
         setMaxOutput(maxOutput);
 
-        if (!SmartDashboard.containsKey("Drive/Drive Max Speed")) {
-            SmartDashboard.putNumber("Drive/Drive Max Speed", maxOutput);
+        if (!SmartDashboard.containsKey("Drive/Drive Max Motor Speed")) {
+            SmartDashboard.putNumber("Drive/Drive Max Motor Speed", maxOutput);
+        }
+        if (!SmartDashboard.containsKey("Drive/Drive Max Forward Speed")) {
+            SmartDashboard.putNumber("Drive/Drive Max Forward Speed", maxForwardSpeed);
+        }
+        if (!SmartDashboard.containsKey("Drive/Drive Max Turn Speed")) {
+            SmartDashboard.putNumber("Drive/Drive Max Turn Speed", maxTurnSpeed);
         }
     }
 
@@ -68,7 +76,9 @@ public class Drive extends ParagonSubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
         outputTelemetry();
-        setMaxOutput(SmartDashboard.getNumber("Drive/Drive Max Speed", maxOutput));
+        setMaxOutput(SmartDashboard.getNumber("Drive/Drive Max Motor Speed", maxOutput));
+        setMaxOutput(SmartDashboard.getNumber("Drive/Drive Max Forward Speed", maxForwardSpeed));
+        setMaxOutput(SmartDashboard.getNumber("Drive/Drive Max Turn Speed", maxTurnSpeed));
 
     }
 
@@ -86,10 +96,10 @@ public class Drive extends ParagonSubsystemBase {
      * 
      * @param speed      robot Speed from [-1.0..1.0]
      * @param curvature  robot turn radius from [-1.0..1.0]
-     * @param isSpinning whether or not the robot is spinning in place
+     * @param spinning whether or not the robot is spinning in place
      */
-    public void drive(double speed, double curvature, boolean isSpinning) {
-        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1), curvature, isSpinning);
+    public void drive(double speed, double curvature, boolean spinning) {
+        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1) * maxForwardSpeed, curvature * maxTurnSpeed, spinning);
     }
 
     /**
@@ -159,6 +169,14 @@ public class Drive extends ParagonSubsystemBase {
 
     public void setMaxOutput(double maxOutput) {
         differentialDrive.setMaxOutput(maxOutput);
+    }
+
+    public void setMaxForwardSpeed(double maxForwardSpeed) {
+        this.maxForwardSpeed = maxForwardSpeed;
+    }
+
+    public void setMaxTurnSpeed(double maxTurnSpeed) {
+        this.maxTurnSpeed = maxTurnSpeed;
     }
 
 }
