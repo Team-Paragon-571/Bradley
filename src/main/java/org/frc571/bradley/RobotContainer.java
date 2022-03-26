@@ -16,6 +16,7 @@ import org.frc571.bradley.commands.ToggleDirectionCommand;
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.subsystems.Hopper;
 import org.frc571.bradley.subsystems.Intake;
+import org.frc571.bradley.subsystems.PowerDistributionPanel;
 import org.frc571.bradley.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -46,6 +47,7 @@ public class RobotContainer {
   public final Hopper m_hopper = Hopper.getInstance();
   public final Intake m_intake = Intake.getInstance();
   public final Drive m_drive = Drive.getInstance();
+  public final PowerDistributionPanel panel = PowerDistributionPanel.getInstance();
 
   // Joysticks
   private final XboxController driveController = new XboxController(0);
@@ -59,6 +61,7 @@ public class RobotContainer {
 
   private RobotContainer() {
 
+    PowerDistributionPanel.getInstance();
     CameraServer.startAutomaticCapture();
 
     // Configure the button bindings

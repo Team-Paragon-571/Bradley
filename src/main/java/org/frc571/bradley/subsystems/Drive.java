@@ -140,8 +140,8 @@ public class Drive extends ParagonSubsystemBase {
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putNumber(getName() + "Drive/LeftMotor/Encoder",
-                getRMasterMotor().getSelectedSensorPosition());
+        SmartDashboard.putNumber("Drive/LeftMotor/Encoder",
+                getLMasterMotor().getSelectedSensorPosition());
         SmartDashboard.putNumber("Drive/RightMotor/Encoder", getRMasterMotor().getSelectedSensorPosition());
         // TODO: add Pigeon IMU telemetry
         // SmartDashboard.putNumber(getName() + "Drive/Pigeon/Yaw", pigeon.getYaw());
