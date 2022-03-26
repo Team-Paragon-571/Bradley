@@ -65,7 +65,17 @@ public class RobotContainer {
     configureButtonBindings();
 
     // Configure default commands0
-    m_drive.setDefaultCommand(new DriveCommand(driveController::getLeftY, driveController::getRightX));
+    m_drive.setDefaultCommand(
+      new DriveCommand(
+        Controller.ApplyJoystickDeadzone(
+          driveController.getLeftY(),
+          Constants.ControlConstants.kDeadzone),
+        Controller.ApplyJoystickDeadzone(
+          driveController.getRightX(),
+          Constants.ControlConstants.kDeadzone)
+      )
+    );
+
     m_shooter.setDefaultCommand(new RevCommand(driveController::getLeftTriggerAxis));
     m_hopper.setDefaultCommand(new FireCommand(driveController::getRightTriggerAxis));
 
