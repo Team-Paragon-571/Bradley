@@ -16,6 +16,7 @@ public class Drive extends ParagonSubsystemBase {
     private WPI_TalonFX rFollower;
     private DifferentialDrive differentialDrive;
     private boolean direction = true;
+    private double maxOutput = 1.0;
 
     private Drive() {
         lMaster = new WPI_TalonFX(1);
@@ -49,8 +50,11 @@ public class Drive extends ParagonSubsystemBase {
         addChild("DifferentialDrive", differentialDrive);
         differentialDrive.setSafetyEnabled(true);
         differentialDrive.setExpiration(0.1);
-        differentialDrive.setMaxOutput(1.0);
+        setMaxOutput(maxOutput);
 
+        if (!SmartDashboard.containsKey("Drive/Drive Max Speed")) {
+            SmartDashboard.putNumber("Drive/Drive Max Speed", maxOutput);
+        }
     }
 
     public synchronized static Drive getInstance() {
@@ -64,6 +68,8 @@ public class Drive extends ParagonSubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
         outputTelemetry();
+        setMaxOutput(SmartDashboard.getNumber("Drive/Drive Max Speed", maxOutput));
+
     }
 
     @Override
@@ -149,6 +155,10 @@ public class Drive extends ParagonSubsystemBase {
 
     public boolean getDirection() {
         return direction;
+    }
+
+    public void setMaxOutput(double maxOutput) {
+        differentialDrive.setMaxOutput(maxOutput);
     }
 
 }
