@@ -16,15 +16,20 @@ public class Drive extends ParagonSubsystemBase {
     private WPI_TalonFX rFollower;
     private DifferentialDrive differentialDrive;
     private boolean direction = true;
+    private double rampTime = 0.5;
 
     private Drive() {
         lMaster = new WPI_TalonFX(1);
+        lMaster.configFactoryDefault();
         rMaster = new WPI_TalonFX(3);
+        rMaster.configFactoryDefault();
 
         lMaster.setInverted(true);
         rMaster.setInverted(false);
         lMaster.setNeutralMode(NeutralMode.Coast);
         rMaster.setNeutralMode(NeutralMode.Coast);
+        lMaster.configOpenloopRamp(rampTime);
+        rMaster.configOpenloopRamp(rampTime);
 
         addChild("lFront", lMaster);
         addChild("rFront", rMaster);
@@ -32,7 +37,9 @@ public class Drive extends ParagonSubsystemBase {
         lMaster.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 20);
 
         lFollower = new WPI_TalonFX(2);
+        lFollower.configFactoryDefault();
         rFollower = new WPI_TalonFX(4);
+        rFollower.configFactoryDefault();
 
         addChild("lFollower", lFollower);
         addChild("rFollower", rFollower);
@@ -127,6 +134,10 @@ public class Drive extends ParagonSubsystemBase {
         SmartDashboard.putNumber(getName() + "Drive/LeftMotor/Encoder",
                 getRMasterMotor().getSelectedSensorPosition());
         SmartDashboard.putNumber("Drive/RightMotor/Encoder", getRMasterMotor().getSelectedSensorPosition());
+        if (SmartDashboard.containsKey("Drive/RampTime")) {
+            rampTime = SmartDashboard.getNumber("Drive/RampTime", rampTime);
+        }
+        SmartDashboard.putNumber("Drive/RampTime", rampTime);
         // TODO: add Pigeon IMU telemetry
         // SmartDashboard.putNumber(getName() + "Drive/Pigeon/Yaw", pigeon.getYaw());
 
