@@ -3,7 +3,7 @@ package org.frc571.bradley;
 public class Controller {
     public static double ApplyJoystickDeadzone(double value, double deadzone) {
         double result;
-        double validRange = 1.0 - deadzone;
+        double validRange = Constants.ControlConstants.MAX_AXIS - deadzone;
 
         if (value > deadzone) {
             result = (value - deadzone) / validRange;

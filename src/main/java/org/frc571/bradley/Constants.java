@@ -31,6 +31,7 @@ public class Constants {
     }
 
     public static final class ControlConstants {
+        public static final double MAX_AXIS = 1.0;
         public static final double kDeadzone = 0.3;
         public static final double kShootMotor = 0.5;
         public static final double FIRE_COMMAND_END = 0.1;

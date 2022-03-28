@@ -1,9 +1,5 @@
 package org.frc571.bradley.commands;
 
-import static org.frc571.bradley.Constants.ControlConstants.kDeadzone;
-
-import java.util.function.DoubleSupplier;
-
 import org.frc571.bradley.subsystems.Drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
