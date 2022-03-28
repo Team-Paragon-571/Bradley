@@ -16,17 +16,9 @@ public class IntakeArms extends ParagonSubsystemBase {
     private static IntakeArms intakeArm;
 
     final private String name;
-    final private CANSparkMax motorLeft;
-    final private CANSparkMax motorRight;
-    final private DigitalInput limitTopLeft;
-    final private DigitalInput limitTopRight;
-    final private DigitalInput limitBottomLeft;
-    final private DigitalInput limitBottomRight;
-    
-    public enum ArmSide {
-        LEFT,
-        RIGHT
-    }
+    final private CANSparkMax motor;
+    final private DigitalInput limitTop;
+    final private DigitalInput limitBottom;
     
     public enum ArmDirection {
         UP,
@@ -35,21 +27,13 @@ public class IntakeArms extends ParagonSubsystemBase {
 
     private IntakeArms() {
         name = getClass().getName();
-        motorLeft = new CANSparkMax(MotorConstants.kLeftIntakeArmPort, MotorType.kBrushless);
-        motorRight = new CANSparkMax(MotorConstants.kRightIntakeArmPort, MotorType.kBrushless);
-        limitTopLeft = new DigitalInput(DigitalConstants.TOP_LEFT_LIMIT_SWITCH);
-        limitTopRight = new DigitalInput(DigitalConstants.TOP_RIGHT_LIMIT_SWITCH);
-        limitBottomLeft = new DigitalInput(DigitalConstants.BOTTOM_LEFT_LIMIT_SWITCH);
-        limitBottomRight = new DigitalInput(DigitalConstants.BOTTOM_RIGHT_LIMIT_SWITCH);
+        motor = new CANSparkMax(MotorConstants.kLeftIntakeArmPort, MotorType.kBrushless);
+        limitTop = new DigitalInput(DigitalConstants.TOP_LEFT_LIMIT_SWITCH);
+        limitBottom = new DigitalInput(DigitalConstants.BOTTOM_LEFT_LIMIT_SWITCH);
 
+        motor.restoreFactoryDefaults();
 
-        motorLeft.restoreFactoryDefaults();
-        motorRight.restoreFactoryDefaults();
-
-        motorLeft.setIdleMode(CANSparkMax.IdleMode.kBrake);
-        motorRight.setIdleMode(CANSparkMax.IdleMode.kBrake);
-
-        // motorLeft.setSmartCurrentLimit(limit)
+        motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
     }
 
@@ -62,12 +46,9 @@ public class IntakeArms extends ParagonSubsystemBase {
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putBoolean("Upper Left Limit Switch", isTopLeftLimitSwitchPressed());
-        SmartDashboard.putBoolean("Lower Limit Switch", isBottomLeftLimitSwitchPressed());
-        SmartDashboard.putBoolean("Upper Right Limit Switch", isTopRightLimitSwitchPressed());
-        SmartDashboard.putBoolean("Lower Right Limit Switch", isBottomRightLimitSwitchPressed());
-        SmartDashboard.putNumber("Left Motor Speed", motorLeft.get());
-        SmartDashboard.putNumber("Right Motor Speed", motorRight.get());
+        SmartDashboard.putBoolean("Upper Left Limit Switch", isTopLimitSwitchPressed());
+        SmartDashboard.putBoolean("Lower Limit Switch", isBottomLimitSwitchPressed());
+        SmartDashboard.putNumber("Motor Speed", motor.get());
     }
 
     @Override
@@ -77,30 +58,16 @@ public class IntakeArms extends ParagonSubsystemBase {
 
     @Override
     public void stop() {
-        motorLeft.stopMotor();
-        motorRight.stopMotor();
+        motor.stopMotor();
     }
     
-    public void stop(ArmSide side) {
-        switch (side) {
-            case LEFT:
-                motorLeft.stopMotor();
-                break;
-            case RIGHT:
-                motorRight.stopMotor();
-                break;
-        }
-    }
-
     public void move(ArmDirection dir, double speed) {
         switch (dir) {
             case UP: 
-                motorRight.set((!isTopRightLimitSwitchPressed() ? speed : 0));
-                motorLeft.set((!isTopLeftLimitSwitchPressed() ? speed : 0));
+                motor.set((!isTopLimitSwitchPressed() ? speed : 0));
                 break;
             case DOWN:
-                motorRight.set((!isBottomRightLimitSwitchPressed() ? -speed: 0));
-                motorLeft.set((!isBottomLeftLimitSwitchPressed() ? -speed : 0));
+                motor.set((!isBottomLimitSwitchPressed() ? -speed : 0));
                 break;
         }
     }
@@ -109,20 +76,12 @@ public class IntakeArms extends ParagonSubsystemBase {
         move(dir, SpeedConstants.kIntakeMotorSpeed);
     }
 
-    public boolean isTopLeftLimitSwitchPressed() {
-        return !limitTopLeft.get();
+    public boolean isTopLimitSwitchPressed() {
+        return !limitTop.get();
     }
 
-    public boolean isBottomLeftLimitSwitchPressed() {
-        return !limitBottomLeft.get();
-    }
-
-    public boolean isTopRightLimitSwitchPressed() {
-        return !limitTopRight.get();
-    }
-
-    public boolean isBottomRightLimitSwitchPressed() {
-        return !limitBottomRight.get();
+    public boolean isBottomLimitSwitchPressed() {
+        return !limitBottom.get();
     }
 
 }

@@ -83,7 +83,7 @@ public class Drive extends ParagonSubsystemBase {
      * @param isSpinning whether or not the robot is spinning in place
      */
     public void drive(double speed, double curvature, boolean isSpinning) {
-        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1), curvature, isSpinning);
+        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1) * 0.60, curvature * -0.50, isSpinning);
     }
 
     /**

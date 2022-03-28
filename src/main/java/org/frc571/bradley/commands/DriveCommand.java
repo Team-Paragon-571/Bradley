@@ -32,7 +32,7 @@ public class DriveCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_drive.drive(m_forward.getAsDouble() * Math.abs(m_forward.getAsDouble())*0.60, -m_turn.getAsDouble() * 0.30,
+        m_drive.drive(m_forward.getAsDouble() * Math.abs(m_forward.getAsDouble()), m_turn.getAsDouble(),
                 // If the robot isn't moving, spin in place
                 (Math.abs(m_forward.getAsDouble()) < kDeadzone));
     }
