@@ -33,13 +33,13 @@ public class AutonomousDriveCommand extends CommandBase {
     public void execute() {
         speed = SmartDashboard.getNumber("AutonomousCommand/Autonomous speed",
                 AutonomousConstants.AUTONOMOUS_COMMAND_SPEED);
-        drive.drive(speed, 0, false);
+        drive.drive(speed, 0);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        drive.drive(0.0, 0.0, false);
+        drive.drive(0.0, 0.0);
     }
 
     // Returns true when the command should end.
