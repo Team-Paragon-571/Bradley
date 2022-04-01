@@ -67,10 +67,10 @@ public class RobotContainer {
     // Configure default commands0
     m_drive.setDefaultCommand(
       new DriveCommand(
-        Controller.ApplyJoystickDeadzone(
+        () -> Controller.ApplyJoystickDeadzone(
           driveController.getLeftY(),
           Constants.ControlConstants.kDeadzone),
-        Controller.ApplyJoystickDeadzone(
+        () -> Controller.ApplyJoystickDeadzone(
           driveController.getRightX(),
           Constants.ControlConstants.kDeadzone)
       )
