@@ -1,5 +1,8 @@
 package org.frc571.bradley.commands;
 
+import java.util.function.DoubleSupplier;
+
+import org.frc571.bradley.Constants.DriveConstants;
 import org.frc571.bradley.subsystems.Drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -7,10 +10,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class DriveCommand extends CommandBase {
 
     private final Drive m_drive;
-    private final Double m_forward;
-    private final Double m_turn;
+    private final DoubleSupplier m_forward;
+    private final DoubleSupplier m_turn;
 
-    public DriveCommand(Double forward, Double turn) {
+    public DriveCommand(DoubleSupplier forward, DoubleSupplier turn) {
 
         m_forward = forward;
         m_turn = turn;
@@ -28,7 +31,8 @@ public class DriveCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_drive.drive(m_forward * Math.abs(m_forward)*0.60, -m_turn * 0.30);
+        m_drive.drive(m_forward.getAsDouble() * Math.abs(m_forward.getAsDouble()) * DriveConstants.MAX_FORWARD_SPEED,
+            -m_turn.getAsDouble() * DriveConstants.MAX_TURNING_SPEED);
     }
 
     // Called once the command ends or is interrupted.

@@ -19,10 +19,12 @@ public class Constants {
         public static final int kLeftMotorRearPort = 2;
         public static final int kRightMotorFrontPort = 3;
         public static final int kRightMotorRearPort = 4;
-        public static final double kMaxOutput = 1.0;
-        public static final String kMaxOutputKey = "drive/maxOutput";
+	public static final double kMaxOutput = 1.0;
+	public static final String kMaxOutputKey = "drive/maxOutput";
+	public static final double MAX_FORWARD_SPEED = 0.6;
+	public static final double MAX_TURNING_SPEED = 0.3;
     }
-
+    
     public static final class MotorConstants {
         public static final int kLeftIntakeArmPort = 7;
         public static final int kRightIntakeArmPort = 8;
@@ -51,9 +53,10 @@ public class Constants {
     }
 
     public static final class SpeedConstants {
-        public static final double kIntakeMotorSpeed = 0.25;
+        public static final double kIntakeMotorSpeed = 0.50;
         public static final double RAISE_INTAKE_SPEED = 0.3;
         public static final double FLYWHEEL_MAX_SPEED = 0.79;
+        
 
     }
 

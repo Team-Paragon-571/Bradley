@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import org.frc571.bradley.Constants.SpeedConstants;
 
 import org.frc571.bradley.Constants;
 import org.frc571.bradley.Constants.DriveConstants;
@@ -23,12 +24,16 @@ public class Drive extends ParagonSubsystemBase {
 
     private Drive() {
         lMaster = new WPI_TalonFX(1);
+        lMaster.configFactoryDefault();
         rMaster = new WPI_TalonFX(3);
+        rMaster.configFactoryDefault();
 
         lMaster.setInverted(true);
         rMaster.setInverted(false);
         lMaster.setNeutralMode(NeutralMode.Coast);
         rMaster.setNeutralMode(NeutralMode.Coast);
+        lMaster.configOpenloopRamp(SpeedConstants.RAMP_TIME);
+        rMaster.configOpenloopRamp(SpeedConstants.RAMP_TIME);
 
         addChild("lFront", lMaster);
         addChild("rFront", rMaster);
@@ -36,7 +41,9 @@ public class Drive extends ParagonSubsystemBase {
         lMaster.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 20);
 
         lFollower = new WPI_TalonFX(2);
+        lFollower.configFactoryDefault();
         rFollower = new WPI_TalonFX(4);
+        rFollower.configFactoryDefault();
 
         addChild("lFollower", lFollower);
         addChild("rFollower", rFollower);
