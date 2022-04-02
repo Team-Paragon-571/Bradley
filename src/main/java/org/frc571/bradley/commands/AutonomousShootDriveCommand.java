@@ -10,8 +10,8 @@ public class AutonomousShootDriveCommand extends SequentialCommandGroup {
         public AutonomousShootDriveCommand(double driveTimeout) {
                 addCommands(
                                 new ParallelRaceGroup(
-                                new RevCommand(() -> 1).withTimeout(2),
-                                                new WaitCommand(0.2).andThen(new FireCommand(() -> 0.7))),
+                                new RevCommand(1).withTimeout(2),
+                                new WaitCommand(0.2).andThen(new FireCommand().withTimeout(1))),
                                 new AutonomousDriveCommand()
                                                 .withTimeout(AutonomousConstants.AUTONOMOUS_COMMAND_DURATION));
         }

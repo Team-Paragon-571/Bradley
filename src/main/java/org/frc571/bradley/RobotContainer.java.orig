@@ -1,9 +1,13 @@
 package org.frc571.bradley;
 
 import org.frc571.bradley.Constants.AutonomousConstants;
+<<<<<<< HEAD
 import org.frc571.bradley.Constants.ControlConstants;
+import org.frc571.bradley.commands.AutonomousCommand;
+=======
 import org.frc571.bradley.commands.AutonomousDriveCommand;
 import org.frc571.bradley.commands.AutonomousShootDriveCommand;
+>>>>>>> origin/master
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
 import org.frc571.bradley.commands.IntakeCommand;
@@ -64,14 +68,23 @@ public class RobotContainer {
     configureButtonBindings();
 
     // Configure default commands0
+<<<<<<< HEAD
+    m_drive.setDefaultCommand(new DriveCommand(driveController::getLeftY, driveController::getRightX));
+=======
     m_drive.setDefaultCommand(
-        new DriveCommand(
-            () -> Controller.ApplyJoystickDeadzone(
-                driveController.getLeftY(),
-                Constants.ControlConstants.kDeadzone),
-            () -> Controller.ApplyJoystickDeadzone(
-                driveController.getRightX(),
-                Constants.ControlConstants.kDeadzone)));
+      new DriveCommand(
+        () -> Controller.ApplyJoystickDeadzone(
+          driveController.getLeftY(),
+          Constants.ControlConstants.kDeadzone),
+        () -> Controller.ApplyJoystickDeadzone(
+          driveController.getRightX(),
+          Constants.ControlConstants.kDeadzone)
+      )
+    );
+
+    m_shooter.setDefaultCommand(new RevCommand(driveController::getLeftTriggerAxis));
+    m_hopper.setDefaultCommand(new FireCommand(driveController::getRightTriggerAxis));
+>>>>>>> origin/master
 
     if (!SmartDashboard.containsKey("AutonomousCommand/Autonomous timeout")) {
       SmartDashboard.putNumber("AutonomousCommand/Autonomous timeout",
@@ -79,8 +92,13 @@ public class RobotContainer {
     }
     double duration = SmartDashboard.getNumber("AutonomousCommand/Autonomous timeout",
         AutonomousConstants.AUTONOMOUS_COMMAND_DURATION);
+<<<<<<< HEAD
+    m_chooser.setDefaultOption("AutonomousCommand", new AutonomousCommand().raceWith(new WaitCommand(duration)));
+
+=======
     m_chooser.setDefaultOption("ShootDrive", new AutonomousShootDriveCommand(duration));
     m_chooser.addOption("AutonomousDrive", new AutonomousDriveCommand().withTimeout(duration));
+>>>>>>> origin/master
     SmartDashboard.putData("Auto Mode", m_chooser);
 
   }
@@ -102,9 +120,9 @@ public class RobotContainer {
     ejectButton.whenPressed(new LowerIntake());
     ejectButton.whileHeld(new EjectCommand(), true);
 
-    final AnalogButton shootButton = new AnalogButton(driveController, XboxController.Axis.kRightTrigger.value,
+    final AnalogButton revButton = new AnalogButton(driveController, XboxController.Axis.kRightTrigger.value,
         ControlConstants.REV_COMMAND_THRESHOLD);
-    shootButton.whenHeld(new ShootCommand());
+    revButton.whenHeld(new ShootCommand());
 
     final JoystickButton stopIntakeButton = new JoystickButton(driveController, XboxController.Button.kB.value);
     stopIntakeButton.whenHeld(new StopIntakeCommand(), true);
@@ -117,10 +135,17 @@ public class RobotContainer {
 
     final POVButton lowerIntakeButton = new POVButton(driveController, 180);
     lowerIntakeButton.whenPressed(new LowerIntake());
+<<<<<<< HEAD
+=======
+
+    final JoystickButton backOffButton = new JoystickButton(driveController,
+        XboxController.Button.kRightBumper.value);
+    backOffButton.whileHeld(new ReverseHopperCommand());
 
     final JoystickButton toggleDirectionButton = new JoystickButton(driveController,
         XboxController.Button.kLeftStick.value);
     toggleDirectionButton.whenPressed(new ToggleDirectionCommand());
+>>>>>>> origin/master
   }
 
   public XboxController getDriveController() {

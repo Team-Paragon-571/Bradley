@@ -12,9 +12,11 @@ public class IntakeCommand extends SequentialCommandGroup {
 
                 new ParallelDeadlineGroup(
                         new RunHopperCommand(),
-                        new RunIntakeCommand()),
+                        new RunIntakeCommand(),
+                        new RevCommand(-0.1)),
                 new ParallelCommandGroup(
-                        new ReverseHopperCommand().withTimeout(0.2)));
+                        new ReverseHopperCommand().withTimeout(0.2),
+                        new RaiseIntake()));
     }
 
     // Called when the command is initially scheduled.
