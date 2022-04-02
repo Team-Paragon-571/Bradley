@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.Constants.AutonomousConstants;
 
-public class AutonomousCommand extends CommandBase {
+public class AutonomousDriveCommand extends CommandBase {
 
     private final Drive drive;
     private double speed = SmartDashboard.getNumber("AutonomousCommand/Autonomous timeout",
             AutonomousConstants.AUTONOMOUS_COMMAND_SPEED);
 
-    public AutonomousCommand() {
+    public AutonomousDriveCommand() {
 
         drive = Drive.getInstance();
         addRequirements(drive);
@@ -33,13 +33,13 @@ public class AutonomousCommand extends CommandBase {
     public void execute() {
         speed = SmartDashboard.getNumber("AutonomousCommand/Autonomous speed",
                 AutonomousConstants.AUTONOMOUS_COMMAND_SPEED);
-        drive.drive(speed, 0, false);
+        drive.drive(speed, 0);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        drive.drive(0.0, 0.0, false);
+        drive.drive(0.0, 0.0);
     }
 
     // Returns true when the command should end.

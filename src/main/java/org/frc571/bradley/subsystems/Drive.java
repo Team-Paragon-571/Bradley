@@ -4,6 +4,10 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import org.frc571.bradley.Constants.SpeedConstants;
+
+import org.frc571.bradley.Constants;
+import org.frc571.bradley.Constants.DriveConstants;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,15 +19,21 @@ public class Drive extends ParagonSubsystemBase {
     private WPI_TalonFX rMaster;
     private WPI_TalonFX rFollower;
     private DifferentialDrive differentialDrive;
+    private boolean direction = true;
+    private double maxOutput = Constants.DriveConstants.kMaxOutput;
 
     private Drive() {
         lMaster = new WPI_TalonFX(1);
+        lMaster.configFactoryDefault();
         rMaster = new WPI_TalonFX(3);
+        rMaster.configFactoryDefault();
 
-        lMaster.setInverted(false);
-        rMaster.setInverted(true);
+        lMaster.setInverted(true);
+        rMaster.setInverted(false);
         lMaster.setNeutralMode(NeutralMode.Coast);
         rMaster.setNeutralMode(NeutralMode.Coast);
+        lMaster.configOpenloopRamp(SpeedConstants.RAMP_TIME);
+        rMaster.configOpenloopRamp(SpeedConstants.RAMP_TIME);
 
         addChild("lFront", lMaster);
         addChild("rFront", rMaster);
@@ -31,7 +41,9 @@ public class Drive extends ParagonSubsystemBase {
         lMaster.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 20);
 
         lFollower = new WPI_TalonFX(2);
+        lFollower.configFactoryDefault();
         rFollower = new WPI_TalonFX(4);
+        rFollower.configFactoryDefault();
 
         addChild("lFollower", lFollower);
         addChild("rFollower", rFollower);
@@ -61,6 +73,13 @@ public class Drive extends ParagonSubsystemBase {
 
     @Override
     public void periodic() {
+        if(!SmartDashboard.containsKey(DriveConstants.kMaxOutputKey)) {
+            SmartDashboard.putNumber(DriveConstants.kMaxOutputKey, maxOutput);
+
+        }
+
+        maxOutput = SmartDashboard.getNumber(DriveConstants.kMaxOutputKey, maxOutput);
+        differentialDrive.setMaxOutput(maxOutput);
         // This method will be called once per scheduler run
         outputTelemetry();
     }
@@ -81,8 +100,8 @@ public class Drive extends ParagonSubsystemBase {
      * @param curvature  robot turn radius from [-1.0..1.0]
      * @param isSpinning whether or not the robot is spinning in place
      */
-    public void drive(double speed, double curvature, boolean isSpinning) {
-        differentialDrive.curvatureDrive(speed, curvature, isSpinning);
+    public void drive(double speed, double curvature) {
+        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1) * 0.60, curvature, speed == 0);
     }
 
     /**
@@ -133,13 +152,21 @@ public class Drive extends ParagonSubsystemBase {
 
     @Override
     public void stop() {
-        drive(0, 0, false);
+        drive(0, 0);
 
     }
 
     @Override
     public String getName() {
         return "Drive";
+    }
+
+    public void toggleDirection() {
+        direction = !direction;
+    }
+
+    public boolean getDirection() {
+        return direction;
     }
 
 }

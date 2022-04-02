@@ -19,8 +19,11 @@ public class Constants {
         public static final int kLeftMotorRearPort = 2;
         public static final int kRightMotorFrontPort = 3;
         public static final int kRightMotorRearPort = 4;
-    }
+	public static final double kMaxOutput = 1.0;
+	public static final String kMaxOutputKey = "drive/maxOutput";
 
+    }
+    
     public static final class MotorConstants {
         public static final int kLeftIntakeArmPort = 7;
         public static final int kRightIntakeArmPort = 8;
@@ -31,6 +34,7 @@ public class Constants {
     }
 
     public static final class ControlConstants {
+        public static final double MAX_AXIS = 1.0;
         public static final double kDeadzone = 0.3;
         public static final double kShootMotor = 0.5;
         public static final double FIRE_COMMAND_THRESHOLD = 0.3;
@@ -48,10 +52,10 @@ public class Constants {
     }
 
     public static final class SpeedConstants {
-        public static final double kIntakeMotorSpeed = 0.5;
+        public static final double kIntakeMotorSpeed = 0.50;
         public static final double RAISE_INTAKE_SPEED = 0.3;
-        public static final double FLYWHEEL_MAX_SPEED = 0.8;
-
+        public static final double FLYWHEEL_MAX_SPEED = 0.79;
+        public static final double RAMP_TIME = 0.79;
     }
 
     public static final class TimeConstants {
@@ -60,7 +64,7 @@ public class Constants {
     }
 
     public static final class AutonomousConstants {
-        public static final double AUTONOMOUS_COMMAND_DURATION = 1.5;
-        public static final double AUTONOMOUS_COMMAND_SPEED = 0.5;
+        public static final double AUTONOMOUS_COMMAND_DURATION = 3.0;
+        public static final double AUTONOMOUS_COMMAND_SPEED = -0.25;
     }
 }
