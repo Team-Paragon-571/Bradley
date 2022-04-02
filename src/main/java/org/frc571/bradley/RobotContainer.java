@@ -5,12 +5,11 @@ import org.frc571.bradley.Constants.ControlConstants;
 import org.frc571.bradley.commands.AutonomousCommand;
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
-import org.frc571.bradley.commands.FireCommand;
 import org.frc571.bradley.commands.IntakeCommand;
 import org.frc571.bradley.commands.LowerIntake;
 import org.frc571.bradley.commands.RaiseIntake;
-import org.frc571.bradley.commands.RevCommand;
 import org.frc571.bradley.commands.ReverseHopperCommand;
+import org.frc571.bradley.commands.ShootCommand;
 import org.frc571.bradley.commands.StopIntakeCommand;
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.subsystems.Hopper;
@@ -97,14 +96,10 @@ public class RobotContainer {
     ejectButton.whenPressed(new LowerIntake());
     ejectButton.whenReleased(new RaiseIntake());
 
-    final AxisButton fireButton = new AxisButton(driveController, XboxController.Axis.kRightTrigger.value,
-        ControlConstants.FIRE_COMMAND_THRESHOLD);
-    fireButton.whenHeld(new FireCommand());
-
-    final AxisButton revButton = new AxisButton(driveController, XboxController.Axis.kLeftTrigger.value,
+    final AnalogButton revButton = new AnalogButton(driveController, XboxController.Axis.kLeftTrigger.value,
         ControlConstants.REV_COMMAND_THRESHOLD);
     revButton.whenPressed(new ReverseHopperCommand().withTimeout(0.1), false);
-    revButton.whenHeld(new RevCommand(driveController.getRightTriggerAxis()));
+    revButton.whenHeld(new ShootCommand());
 
     final JoystickButton stopIntakeButton = new JoystickButton(driveController, XboxController.Button.kB.value);
     stopIntakeButton.whenPressed(new StopIntakeCommand(), true);

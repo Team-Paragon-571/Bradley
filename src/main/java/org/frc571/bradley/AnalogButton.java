@@ -4,7 +4,7 @@ import static edu.wpi.first.wpilibj.util.ErrorMessages.requireNonNullParam;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.Button;
 
-public class AxisButton extends Button {
+public class AnalogButton extends Button {
     GenericHID joystick;
     int axis;
     double threshold;
@@ -16,7 +16,7 @@ public class AxisButton extends Button {
      * @param axis      The axis number (see {@link GenericHID#getRawAxis(int) } )
      * @param threshold The threshold beyond which the button is triggered.
      */
-    public AxisButton(GenericHID joystick, int axis, double threshold) {
+    public AnalogButton(GenericHID joystick, int axis, double threshold) {
         requireNonNullParam(joystick, "joystick", "AxisButton");
         this.joystick = joystick;
         this.axis = axis;
