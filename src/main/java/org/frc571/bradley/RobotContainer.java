@@ -103,7 +103,7 @@ public class RobotContainer {
     ejectButton.whileHeld(new EjectCommand(), true);
 
     final AnalogButton shootButton = new AnalogButton(driveController, XboxController.Axis.kRightTrigger.value,
-        ControlConstants.REV_COMMAND_THRESHOLD);
+        ControlConstants.SHOOT_TRIGGER_THRESHOLD);
     shootButton.whenHeld(new ShootCommand());
 
     final JoystickButton stopIntakeButton = new JoystickButton(driveController, XboxController.Button.kB.value);

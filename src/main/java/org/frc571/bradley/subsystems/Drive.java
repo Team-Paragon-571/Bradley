@@ -4,10 +4,10 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import org.frc571.bradley.Constants.SpeedConstants;
 
 import org.frc571.bradley.Constants;
 import org.frc571.bradley.Constants.DriveConstants;
+import org.frc571.bradley.Constants.TimeConstants;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,8 +32,8 @@ public class Drive extends ParagonSubsystemBase {
         rMaster.setInverted(false);
         lMaster.setNeutralMode(NeutralMode.Coast);
         rMaster.setNeutralMode(NeutralMode.Coast);
-        lMaster.configOpenloopRamp(SpeedConstants.RAMP_TIME);
-        rMaster.configOpenloopRamp(SpeedConstants.RAMP_TIME);
+        lMaster.configOpenloopRamp(TimeConstants.RAMP_TIME);
+        rMaster.configOpenloopRamp(TimeConstants.RAMP_TIME);
 
         addChild("lFront", lMaster);
         addChild("rFront", rMaster);

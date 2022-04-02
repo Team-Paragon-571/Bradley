@@ -37,8 +37,7 @@ public class Constants {
         public static final double MAX_AXIS = 1.0;
         public static final double kDeadzone = 0.3;
         public static final double kShootMotor = 0.5;
-        public static final double FIRE_COMMAND_THRESHOLD = 0.3;
-        public static final double REV_COMMAND_THRESHOLD = 0.1;
+        public static final double SHOOT_TRIGGER_THRESHOLD = 0.3;
     }
 
     public static final class DigitalConstants {
@@ -55,12 +54,12 @@ public class Constants {
         public static final double kIntakeMotorSpeed = 0.50;
         public static final double RAISE_INTAKE_SPEED = 0.3;
         public static final double FLYWHEEL_MAX_SPEED = 0.79;
-        public static final double RAMP_TIME = 0.4;
     }
 
     public static final class TimeConstants {
         public static final double BACKUP_TIME = 0.1;
         public static final double FLYWHEEL_REV_TIME = 0.7;
+        public static final double RAMP_TIME = 0.4;
     }
 
     public static final class AutonomousConstants {
