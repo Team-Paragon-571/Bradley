@@ -6,6 +6,9 @@ import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import org.frc571.bradley.Constants.SpeedConstants;
 
+import org.frc571.bradley.Constants;
+import org.frc571.bradley.Constants.DriveConstants;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,6 +20,7 @@ public class Drive extends ParagonSubsystemBase {
     private WPI_TalonFX rFollower;
     private DifferentialDrive differentialDrive;
     private boolean direction = true;
+    private double maxOutput = Constants.DriveConstants.kMaxOutput;
 
     private Drive() {
         lMaster = new WPI_TalonFX(1);
@@ -69,6 +73,13 @@ public class Drive extends ParagonSubsystemBase {
 
     @Override
     public void periodic() {
+        if(!SmartDashboard.containsKey(DriveConstants.kMaxOutputKey)) {
+            SmartDashboard.putNumber(DriveConstants.kMaxOutputKey, maxOutput);
+
+        }
+
+        maxOutput = SmartDashboard.getNumber(DriveConstants.kMaxOutputKey, maxOutput);
+        differentialDrive.setMaxOutput(maxOutput);
         // This method will be called once per scheduler run
         outputTelemetry();
     }
