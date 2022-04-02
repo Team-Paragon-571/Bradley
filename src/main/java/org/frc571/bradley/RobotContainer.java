@@ -8,7 +8,6 @@ import org.frc571.bradley.commands.EjectCommand;
 import org.frc571.bradley.commands.IntakeCommand;
 import org.frc571.bradley.commands.LowerIntake;
 import org.frc571.bradley.commands.RaiseIntake;
-import org.frc571.bradley.commands.ReverseHopperCommand;
 import org.frc571.bradley.commands.ShootCommand;
 import org.frc571.bradley.commands.StopIntakeCommand;
 import org.frc571.bradley.subsystems.Drive;
@@ -96,9 +95,8 @@ public class RobotContainer {
     ejectButton.whenPressed(new LowerIntake());
     ejectButton.whenReleased(new RaiseIntake());
 
-    final AnalogButton revButton = new AnalogButton(driveController, XboxController.Axis.kLeftTrigger.value,
+    final AnalogButton revButton = new AnalogButton(driveController, XboxController.Axis.kRightTrigger.value,
         ControlConstants.REV_COMMAND_THRESHOLD);
-    revButton.whenPressed(new ReverseHopperCommand().withTimeout(0.1), false);
     revButton.whenHeld(new ShootCommand());
 
     final JoystickButton stopIntakeButton = new JoystickButton(driveController, XboxController.Button.kB.value);
