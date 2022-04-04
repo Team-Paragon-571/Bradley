@@ -2,7 +2,6 @@ package org.frc571.bradley.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.Constants.AutonomousConstants;
