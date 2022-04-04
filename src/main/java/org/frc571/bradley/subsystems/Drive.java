@@ -120,7 +120,7 @@ public class Drive extends ParagonSubsystemBase {
             lMaster.configOpenloopRamp(rampTime);
             rMaster.configOpenloopRamp(rampTime);
         }
-        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1) * 0.60, curvature, speed == 0);
+        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1), curvature, speed == 0);
     }
 
     /**
@@ -177,7 +177,7 @@ public class Drive extends ParagonSubsystemBase {
 
     @Override
     public String getName() {
-        return "Drive";
+        return "drive";
     }
 
     public void toggleDirection() {
