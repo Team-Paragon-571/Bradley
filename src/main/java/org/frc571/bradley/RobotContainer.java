@@ -10,13 +10,11 @@ import org.frc571.bradley.commands.IntakeCommand;
 import org.frc571.bradley.commands.LowerIntake;
 import org.frc571.bradley.commands.RaiseIntake;
 import org.frc571.bradley.commands.ShootCommand;
-import org.frc571.bradley.commands.StopIntakeCommand;
 import org.frc571.bradley.commands.ToggleDirectionCommand;
 import org.frc571.bradley.subsystems.Drive;
 import org.frc571.bradley.subsystems.Hopper;
 import org.frc571.bradley.subsystems.Intake;
 import org.frc571.bradley.subsystems.Shooter;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -107,16 +105,16 @@ public class RobotContainer {
     shootButton.whenHeld(new ShootCommand());
 
     final JoystickButton stopIntakeButton = new JoystickButton(driveController, XboxController.Button.kB.value);
-    stopIntakeButton.whenHeld(new StopIntakeCommand(), true);
+    stopIntakeButton.whenPressed(new RaiseIntake(), true);
 
     final JoystickButton intakeButton = new JoystickButton(driveController, XboxController.Button.kA.value);
     intakeButton.whenPressed(new IntakeCommand(), true);
 
     final POVButton raiseIntakeButton = new POVButton(driveController, 0);
-    raiseIntakeButton.whenPressed(new RaiseIntake());
+    raiseIntakeButton.whenHeld(new RaiseIntake());
 
     final POVButton lowerIntakeButton = new POVButton(driveController, 180);
-    lowerIntakeButton.whenPressed(new LowerIntake());
+    lowerIntakeButton.whenHeld(new LowerIntake());
 
     final JoystickButton toggleDirectionButton = new JoystickButton(driveController,
         XboxController.Button.kLeftStick.value);
