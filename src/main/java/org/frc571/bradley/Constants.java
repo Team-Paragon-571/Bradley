@@ -21,6 +21,8 @@ public class Constants {
         public static final int kRightMotorRearPort = 4;
 	public static final double kMaxOutput = 1.0;
 	public static final String kMaxOutputKey = "drive/maxOutput";
+    public static final String kMaxHangOutputKey = "drive/maxHangOutput";
+    public static final double kMaxHangOutput = 0.4;
 
     }
     

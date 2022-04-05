@@ -6,6 +6,7 @@ import org.frc571.bradley.commands.AutonomousDriveCommand;
 import org.frc571.bradley.commands.AutonomousShootDriveCommand;
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
+import org.frc571.bradley.commands.HangDriveCommand;
 import org.frc571.bradley.commands.IntakeCommand;
 import org.frc571.bradley.commands.LowerIntake;
 import org.frc571.bradley.commands.RaiseIntake;
@@ -119,6 +120,10 @@ public class RobotContainer {
     final JoystickButton toggleDirectionButton = new JoystickButton(driveController,
         XboxController.Button.kLeftStick.value);
     toggleDirectionButton.whenPressed(new ToggleDirectionCommand());
+
+    final JoystickButton driveAtMaxLowHangSpeed = new JoystickButton(driveController, 
+    XboxController.Button.kX.value);
+    driveAtMaxLowHangSpeed.whenHeld(new HangDriveCommand());
   }
 
   public XboxController getDriveController() {
