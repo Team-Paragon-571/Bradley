@@ -6,6 +6,7 @@ import org.frc571.bradley.commands.AutonomousDriveCommand;
 import org.frc571.bradley.commands.AutonomousShootDriveCommand;
 import org.frc571.bradley.commands.DriveCommand;
 import org.frc571.bradley.commands.EjectCommand;
+import org.frc571.bradley.commands.TogglePrecisionTurnMode;
 import org.frc571.bradley.commands.IntakeCommand;
 import org.frc571.bradley.commands.LowerIntake;
 import org.frc571.bradley.commands.RaiseIntake;
@@ -121,6 +122,10 @@ public class RobotContainer {
     final JoystickButton toggleDirectionButton = new JoystickButton(driveController,
         XboxController.Button.kLeftStick.value);
     toggleDirectionButton.whenPressed(new ToggleDirectionCommand());
+
+    final JoystickButton togglePrecisionTurnModeButton = new JoystickButton(driveController,
+        XboxController.Button.kRightStick.value);
+    togglePrecisionTurnModeButton.whenHeld(new TogglePrecisionTurnMode());
   }
 
   public XboxController getDriveController() {
