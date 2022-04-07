@@ -5,7 +5,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import org.frc571.bradley.Constants;
 import org.frc571.bradley.Constants.DriveConstants;
 import org.frc571.bradley.Constants.TimeConstants;
 
@@ -20,7 +19,10 @@ public class Drive extends ParagonSubsystemBase {
     private WPI_TalonFX rFollower;
     private DifferentialDrive differentialDrive;
     private boolean direction = true;
-    private double maxOutput = Constants.DriveConstants.kMaxOutput;
+    private double maxOutput = DriveConstants.kMaxOutput;
+    private double rampTime = TimeConstants.RAMP_TIME;
+    private double turnSpeed = 0.3;
+    private boolean precisionTurnMode = false;
 
     private Drive() {
         lMaster = new WPI_TalonFX(1);
@@ -32,8 +34,8 @@ public class Drive extends ParagonSubsystemBase {
         rMaster.setInverted(false);
         lMaster.setNeutralMode(NeutralMode.Coast);
         rMaster.setNeutralMode(NeutralMode.Coast);
-        lMaster.configOpenloopRamp(TimeConstants.RAMP_TIME);
-        rMaster.configOpenloopRamp(TimeConstants.RAMP_TIME);
+        lMaster.configOpenloopRamp(rampTime);
+        rMaster.configOpenloopRamp(rampTime);
 
         addChild("lFront", lMaster);
         addChild("rFront", rMaster);
@@ -73,12 +75,23 @@ public class Drive extends ParagonSubsystemBase {
 
     @Override
     public void periodic() {
-        if(!SmartDashboard.containsKey(DriveConstants.kMaxOutputKey)) {
+        if (!SmartDashboard.containsKey(DriveConstants.RAMP_TIME_KEY)) {
+            SmartDashboard.putNumber(DriveConstants.RAMP_TIME_KEY, rampTime);
+
+        }
+        rampTime = SmartDashboard.getNumber(DriveConstants.RAMP_TIME_KEY, rampTime);
+
+        if (!SmartDashboard.containsKey(DriveConstants.kMaxOutputKey)) {
             SmartDashboard.putNumber(DriveConstants.kMaxOutputKey, maxOutput);
 
         }
-
         maxOutput = SmartDashboard.getNumber(DriveConstants.kMaxOutputKey, maxOutput);
+
+        if (!SmartDashboard.containsKey(DriveConstants.TURN_SPEED_SCALE_KEY)) {
+            SmartDashboard.putNumber(DriveConstants.TURN_SPEED_SCALE_KEY, maxOutput);
+
+        }
+        turnSpeed = SmartDashboard.getNumber(DriveConstants.TURN_SPEED_SCALE_KEY, turnSpeed);
         differentialDrive.setMaxOutput(maxOutput);
         // This method will be called once per scheduler run
         outputTelemetry();
@@ -101,7 +114,8 @@ public class Drive extends ParagonSubsystemBase {
      * @param isSpinning whether or not the robot is spinning in place
      */
     public void drive(double speed, double curvature) {
-        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1) * 0.60, curvature, speed == 0);
+        differentialDrive.curvatureDrive(speed * (direction ? 1 : -1), curvature * (speed == 0 && precisionTurnMode ? turnSpeed : 1),
+                speed == 0);
     }
 
     /**
@@ -142,9 +156,9 @@ public class Drive extends ParagonSubsystemBase {
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putNumber(getName() + "Drive/LeftMotor/Encoder",
+        SmartDashboard.putNumber("drive/LeftMotor/Encoder",
                 getRMasterMotor().getSelectedSensorPosition());
-        SmartDashboard.putNumber("Drive/RightMotor/Encoder", getRMasterMotor().getSelectedSensorPosition());
+        SmartDashboard.putNumber("drive/RightMotor/Encoder", getRMasterMotor().getSelectedSensorPosition());
         // TODO: add Pigeon IMU telemetry
         // SmartDashboard.putNumber(getName() + "Drive/Pigeon/Yaw", pigeon.getYaw());
 
@@ -158,7 +172,7 @@ public class Drive extends ParagonSubsystemBase {
 
     @Override
     public String getName() {
-        return "Drive";
+        return "drive";
     }
 
     public void toggleDirection() {
@@ -167,6 +181,33 @@ public class Drive extends ParagonSubsystemBase {
 
     public boolean getDirection() {
         return direction;
+    }
+
+    public boolean isPrecisionTurnMode() {
+        return precisionTurnMode;
+    }
+
+    public void togglePrecisionTurnMode() {
+        precisionTurnMode = !precisionTurnMode;
+        if (precisionTurnMode) {
+            lMaster.setNeutralMode(NeutralMode.Brake);
+            rMaster.setNeutralMode(NeutralMode.Brake);
+            lFollower.setNeutralMode(NeutralMode.Brake);
+            rFollower.setNeutralMode(NeutralMode.Brake);
+            lMaster.configOpenloopRamp(0);
+            rMaster.configOpenloopRamp(0);
+            lFollower.configOpenloopRamp(0);
+            rFollower.configOpenloopRamp(0);
+        } else {
+            lMaster.setNeutralMode(NeutralMode.Coast);
+            rMaster.setNeutralMode(NeutralMode.Coast);
+            lFollower.setNeutralMode(NeutralMode.Coast);
+            rFollower.setNeutralMode(NeutralMode.Coast);
+            lMaster.configOpenloopRamp(rampTime);
+            rMaster.configOpenloopRamp(rampTime);
+            lFollower.configOpenloopRamp(rampTime);
+            rFollower.configOpenloopRamp(rampTime);
+        }
     }
 
 }

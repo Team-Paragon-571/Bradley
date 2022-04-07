@@ -19,13 +19,15 @@ public class Constants {
         public static final int kLeftMotorRearPort = 2;
         public static final int kRightMotorFrontPort = 3;
         public static final int kRightMotorRearPort = 4;
-	public static final double kMaxOutput = 1.0;
-	public static final String kMaxOutputKey = "drive/maxOutput";
-    public static final String kMaxHangOutputKey = "drive/maxHangOutput";
-    public static final double kMaxHangOutput = 0.4;
+        public static final double kMaxOutput = 1.0;
+        public static final String kMaxOutputKey = "drive/maxOutput";
+        public static final String kMaxHangOutputKey = "drive/maxHangOutput";
+        public static final double kMaxHangOutput = 0.4;
+        public static final String RAMP_TIME_KEY = "drive/rampTime";
+        public static final String TURN_SPEED_SCALE_KEY = "drive/turnSpeedScale";
 
     }
-    
+
     public static final class MotorConstants {
         public static final int kLeftIntakeArmPort = 7;
         public static final int kRightIntakeArmPort = 8;
