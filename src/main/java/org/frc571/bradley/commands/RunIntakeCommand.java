@@ -11,6 +11,7 @@ public class RunIntakeCommand extends CommandBase {
 
     public RunIntakeCommand() {
         intake = Intake.getInstance();
+        addRequirements(intake);
     }
 
     @Override

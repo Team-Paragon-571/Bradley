@@ -10,6 +10,7 @@ public class ReverseIntakeCommand extends CommandBase {
 
     public ReverseIntakeCommand() {
         intake = Intake.getInstance();
+        addRequirements(intake);
     }
 
     @Override
