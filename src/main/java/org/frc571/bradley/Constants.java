@@ -55,7 +55,7 @@ public class Constants {
     }
 
     public static final class SpeedConstants {
-        public static final double kIntakeMotorSpeed = 0.50;
+        public static final double kIntakeMotorSpeed = 0.75;
         public static final double RAISE_INTAKE_SPEED = 0.3;
         public static final double FLYWHEEL_MAX_SPEED = 0.79;
     }
