@@ -30,7 +30,7 @@ public class DriveCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_drive.drive(m_forward.getAsDouble() * Math.abs(m_forward.getAsDouble()),
+        m_drive.drive(m_forward.getAsDouble() * Math.abs(m_forward.getAsDouble()) * m_drive.getMaxDriveSpeed(),
             -m_turn.getAsDouble());
     }
 

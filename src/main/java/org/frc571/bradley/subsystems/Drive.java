@@ -19,7 +19,7 @@ public class Drive extends ParagonSubsystemBase {
     private WPI_TalonFX rFollower;
     private DifferentialDrive differentialDrive;
     private boolean direction = true;
-    private double maxOutput = DriveConstants.kMaxOutput;
+    private double maxDriveSpeed = DriveConstants.kMaxOutput;
     // private double rampTime = TimeConstants.RAMP_TIME;
     private double turnSpeed = 0.3;
     private boolean precisionTurnMode = false;
@@ -79,17 +79,16 @@ public class Drive extends ParagonSubsystemBase {
         // rampTime = SmartDashboard.getNumber(DriveConstants.RAMP_TIME_KEY, rampTime);
 
         if (!SmartDashboard.containsKey(DriveConstants.kMaxOutputKey)) {
-            SmartDashboard.putNumber(DriveConstants.kMaxOutputKey, maxOutput);
+            SmartDashboard.putNumber(DriveConstants.kMaxOutputKey, maxDriveSpeed);
 
         }
-        maxOutput = SmartDashboard.getNumber(DriveConstants.kMaxOutputKey, maxOutput);
+        maxDriveSpeed = SmartDashboard.getNumber(DriveConstants.kMaxOutputKey, maxDriveSpeed);
 
         if (!SmartDashboard.containsKey(DriveConstants.TURN_SPEED_SCALE_KEY)) {
-            SmartDashboard.putNumber(DriveConstants.TURN_SPEED_SCALE_KEY, maxOutput);
+            SmartDashboard.putNumber(DriveConstants.TURN_SPEED_SCALE_KEY, turnSpeed);
 
         }
         turnSpeed = SmartDashboard.getNumber(DriveConstants.TURN_SPEED_SCALE_KEY, turnSpeed);
-        differentialDrive.setMaxOutput(maxOutput);
         // This method will be called once per scheduler run
         outputTelemetry();
     }
@@ -140,6 +139,10 @@ public class Drive extends ParagonSubsystemBase {
      */
     public WPI_TalonFX getLFollowerMotor() {
         return lFollower;
+    }
+    
+    public double getMaxDriveSpeed() {
+        return maxDriveSpeed;
     }
 
     /**
