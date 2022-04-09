@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import org.frc571.bradley.Constants.DriveConstants;
-import org.frc571.bradley.Constants.TimeConstants;
+// import org.frc571.bradley.Constants.TimeConstants;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,7 +20,7 @@ public class Drive extends ParagonSubsystemBase {
     private DifferentialDrive differentialDrive;
     private boolean direction = true;
     private double maxOutput = DriveConstants.kMaxOutput;
-    private double rampTime = TimeConstants.RAMP_TIME;
+    // private double rampTime = TimeConstants.RAMP_TIME;
     private double turnSpeed = 0.3;
     private boolean precisionTurnMode = false;
 
@@ -34,8 +34,6 @@ public class Drive extends ParagonSubsystemBase {
         rMaster.setInverted(false);
         lMaster.setNeutralMode(NeutralMode.Coast);
         rMaster.setNeutralMode(NeutralMode.Coast);
-        lMaster.configOpenloopRamp(rampTime);
-        rMaster.configOpenloopRamp(rampTime);
 
         addChild("lFront", lMaster);
         addChild("rFront", rMaster);
@@ -75,11 +73,10 @@ public class Drive extends ParagonSubsystemBase {
 
     @Override
     public void periodic() {
-        if (!SmartDashboard.containsKey(DriveConstants.RAMP_TIME_KEY)) {
-            SmartDashboard.putNumber(DriveConstants.RAMP_TIME_KEY, rampTime);
-
-        }
-        rampTime = SmartDashboard.getNumber(DriveConstants.RAMP_TIME_KEY, rampTime);
+        // if (!SmartDashboard.containsKey(DriveConstants.RAMP_TIME_KEY)) {
+        //     SmartDashboard.putNumber(DriveConstants.RAMP_TIME_KEY, rampTime);
+        // }
+        // rampTime = SmartDashboard.getNumber(DriveConstants.RAMP_TIME_KEY, rampTime);
 
         if (!SmartDashboard.containsKey(DriveConstants.kMaxOutputKey)) {
             SmartDashboard.putNumber(DriveConstants.kMaxOutputKey, maxOutput);
@@ -194,19 +191,11 @@ public class Drive extends ParagonSubsystemBase {
             rMaster.setNeutralMode(NeutralMode.Brake);
             lFollower.setNeutralMode(NeutralMode.Brake);
             rFollower.setNeutralMode(NeutralMode.Brake);
-            lMaster.configOpenloopRamp(0);
-            rMaster.configOpenloopRamp(0);
-            lFollower.configOpenloopRamp(0);
-            rFollower.configOpenloopRamp(0);
         } else {
             lMaster.setNeutralMode(NeutralMode.Coast);
             rMaster.setNeutralMode(NeutralMode.Coast);
             lFollower.setNeutralMode(NeutralMode.Coast);
             rFollower.setNeutralMode(NeutralMode.Coast);
-            lMaster.configOpenloopRamp(rampTime);
-            rMaster.configOpenloopRamp(rampTime);
-            lFollower.configOpenloopRamp(rampTime);
-            rFollower.configOpenloopRamp(rampTime);
         }
     }
 
