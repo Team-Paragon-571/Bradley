@@ -19,10 +19,12 @@ public class Intake extends ParagonSubsystemBase {
      * Takes in game pieces off the floor
      */
     private Intake() {
-        intakeMotor = new CANSparkMax(Constants.MotorConstants.INTAKE_MOTOR, MotorType.kBrushless);
-        intakeMotor.setInverted(true);
-        intakeMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
-
+        intakeMotor = new CANSparkMax(Constants.MotorConstants.INTAKE_MOTOR, MotorType.kBrushed);
+        // intakeMotor.restoreFactoryDefaults();
+        // intakeMotor.setInverted(true);
+        // intakeMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
+        // intakeMotor.setSmartCurrentLimit(35);
+        
     }
 
     public static synchronized Intake getInstance() {

@@ -9,6 +9,7 @@ public class RunHopperCommand extends CommandBase {
 
     public RunHopperCommand() {
         hopper = Hopper.getInstance();
+        addRequirements(hopper);
     }
 
     @Override

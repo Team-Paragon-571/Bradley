@@ -1,7 +1,6 @@
 package org.frc571.bradley.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 
@@ -9,7 +8,7 @@ public class IntakeCommand extends SequentialCommandGroup {
 
     public IntakeCommand() {
         addCommands(
-                new LowerIntake().raceWith(new WaitCommand(1)),
+                new LowerIntake().withTimeout(1),
 
                 new ParallelRaceGroup (
                         new RunHopperCommand(),

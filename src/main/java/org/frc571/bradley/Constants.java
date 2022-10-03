@@ -22,19 +22,18 @@ public class Constants {
         public static final double kMaxOutput = 1.0;
         public static final String kMaxOutputKey = "drive/maxOutput";
         public static final String kMaxHangOutputKey = "drive/maxHangOutput";
-        public static final double kMaxHangOutput = 0.4;
+        public static final double kMaxHangOutput = -0.25;
         public static final String RAMP_TIME_KEY = "drive/rampTime";
         public static final String TURN_SPEED_SCALE_KEY = "drive/turnSpeedScale";
 
     }
 
     public static final class MotorConstants {
+        public static final int kLeftIndexMotor = 5;
+        public static final int kShooterMotor = 6;
         public static final int kLeftIntakeArmPort = 7;
         public static final int kRightIntakeArmPort = 8;
         public static final int INTAKE_MOTOR = 9;
-        public static final int kLeftIndexMotor = 5;
-        public static final int kRightIndexMotor = 18;
-        public static final int kShooterMotor = 6;
     }
 
     public static final class ControlConstants {
@@ -45,17 +44,17 @@ public class Constants {
     }
 
     public static final class DigitalConstants {
-        public static final int TOP_LEFT_LIMIT_SWITCH = 1;
+        public static final int TOP_LEFT_LIMIT_SWITCH = 5;
         public static final int TOP_RIGHT_LIMIT_SWITCH = 3;
         public static final int BOTTOM_LEFT_LIMIT_SWITCH = 0;
         public static final int BOTTOM_RIGHT_LIMIT_SWITCH = 2;
-        public static final int kFrontInput = 4;
+        public static final int kFrontInput = 1;
         public static final int kMiddleInput = 12;
-        public static final int kBackInput = 5;
+        public static final int kBackInput = 4;
     }
 
     public static final class SpeedConstants {
-        public static final double kIntakeMotorSpeed = 0.75;
+        public static final double kIntakeMotorSpeed = -0.75;
         public static final double RAISE_INTAKE_SPEED = 0.3;
         public static final double FLYWHEEL_MAX_SPEED = 0.79;
     }
